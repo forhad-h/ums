@@ -1,0 +1,164 @@
+#btn-add, #btn-add-role {
+	width: 250px;
+	color: #fff;
+	position: relative;
+}
+#btn-add i.fa, #btn-add-role i.fa {
+	position: absolute;
+	right: 10px;
+	top: 6px;
+	font-size: 19px;
+	-webkit-transition: transform 0.5s ease;
+      -o-transition: transform 0.5s ease;
+        transition: transform 0.5s ease;
+}
+#btn-add-role {
+	width: 170px;
+}
+#btn-add-role i.fa {
+	right: 10px;
+	top: 0;
+}
+.add-pheading {
+	padding: 0 0 3px 0;
+}
+.custom-padding {
+	padding-left: 30px;
+	padding-right: 30px;
+}
+.body0 {
+	padding-left: 10%;
+	padding-right: 10%;
+}
+.body0 > .row:last-child, .body0 > .row:first-child {
+	border: 0 none;
+	padding-bottom: 0;
+}
+.footer0 {
+	background: #fff;
+	margin-left: 10%;
+	margin-right: 10%;
+}
+.footer1 {
+	background: #fff;
+}
+.text-require {
+	color: #fd9b52;
+	font-size: 82%;
+	font-weight: normal;
+	margin-left: 5px;
+	text-transform: lowercase;
+}
+.text-optional {
+	color: #999;
+	font-size: 82%;
+	font-weight: normal;
+	margin-left: 5px;
+	text-transform: lowercase;
+}
+.breadcrumb {
+	background: transparent;
+	margin-bottom: 10px;
+}
+.grad {
+	margin-left: 20%;
+	margin-top: 9px;
+}
+.iradio_minimal-blue {
+	margin-right: 10px;
+}
+.text-pr {
+	background: #fafafa none repeat scroll 0 0;
+	border-radius: 0;
+	color: #888;
+	margin-left: -10px;
+	margin-right: 41px;
+	padding: 5px;
+	margin-top: 30px;
+}
+.viewtwice {
+	padding: 25px;
+}
+.viewtwice > strong {
+	min-width: 150px;
+    display: inline-block;
+}
+.viewtwice > p {
+	display: inline-block;
+}
+.viewtwice > p > span {
+	margin-right: 15px;
+}
+.vpi {
+	left: 25%;
+	position: absolute;
+	top: -69px;
+}
+.vpi img {
+	border-width: 1px;
+	display: inline-block;
+	margin: 0;
+	vertical-align: bottom;
+	height: 120px;
+	width: auto;
+	background: #fff;
+}
+input[type="file"]#ppic {
+	display: inline-block;
+}
+.inputfile-1 + label {
+	background: #3c8dbc;
+	color: #fff;
+}
+.inputfile-1:focus + label,
+.inputfile-1.has-focus + label,
+.inputfile-1 + label:hover {
+	background: #286090;
+}
+
+.manage-btn > .btn {
+	padding: 3px;
+	font-size: 12px;
+	margin-left: 3px;
+}
+
+.active a i.fa {
+	color: #fff!important;
+}
+
+/*Confirmation alert box*/
+.alert-box-wrapper {
+    background: rgba(0, 0, 0, 0.2) none repeat scroll 0 0;
+    bottom: 0;
+    display: block;
+    height: 100%;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 100%;
+    text-align: center;
+    z-index: 99999;
+    display: block;
+}
+.alert-box-wrapper > .alert-box {
+    background: #fff none repeat scroll 0 0;
+    border-bottom: 1px solid #f00;
+    box-shadow: 0 10px 10px #aaa;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 250px;
+    padding: 20px;
+    width: 260px;
+}
+.alert-box > p {
+    margin-bottom: 20px;
+}
+.alert-box > a {
+   color: #000;
+    display: inline-block;
+    font-weight: 900;
+    margin-left: 25px;
+    margin-right: 25px;
+    padding: 5px;
+}

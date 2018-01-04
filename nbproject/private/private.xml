@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/F:/xampp/htdocs/UMS/resources/views/admin/user/edit-profile.blade.php</file>
+            <file>file:/F:/xampp/htdocs/UMS/app/Http/Controllers/UserController.php</file>
+            <file>file:/F:/xampp/htdocs/UMS/database/migrations/2018_01_03_163533_create_admissions_table.php</file>
+            <file>file:/F:/xampp/htdocs/UMS/resources/views/admission/form.blade.php</file>
+            <file>file:/F:/xampp/htdocs/UMS/routes/breadcrumbs.php</file>
+            <file>file:/F:/xampp/htdocs/UMS/resources/views/admin/user/all.blade.php</file>
+            <file>file:/F:/xampp/htdocs/UMS/resources/views/layouts/index.blade.php</file>
+            <file>file:/F:/xampp/htdocs/UMS/routes/web.php</file>
+            <file>file:/F:/xampp/htdocs/UMS/app/Http/Controllers/AdmissionController.php</file>
+        </group>
+    </open-files>
+</project-private>
