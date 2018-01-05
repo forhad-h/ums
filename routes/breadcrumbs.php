@@ -41,10 +41,9 @@ Breadcrumbs::register('students', function ($breadcrumbs) {
     $breadcrumbs->push('Students', route('allStudents'));
 });
 
-Breadcrumbs::register('personal-settings', function($breadcrumbs) {
+Breadcrumbs::register('settings', function($breadcrumbs) {
     $breadcrumbs->parent('home');
     $breadcrumbs->push('Settings', route('personalSettings'));
-    $breadcrumbs->push('Personal settings', route('personalSettings'));
 });
 
 Breadcrumbs::register('admissionForm', function ($breadcrumbs) {

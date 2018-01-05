@@ -13,7 +13,7 @@ $(document).ready(function(){
 	  format: 'd MM yyyy'
 	})
 	
-	$('#b_date').datepicker({
+	$('#bdate').datepicker({
 	  autoclose: true,
 	  format: 'd MM yyyy'
 	})
@@ -64,4 +64,8 @@ function softDelete(e, thisElm) {
 			$(thisElm).children('i.fa').removeClass('fa-eye-slash').addClass('fa-eye');
 		}
 	});
+}
+
+function setAction(thisElm) {
+	$('#am-form').attr('action', $(thisElm).attr('href'));
 }

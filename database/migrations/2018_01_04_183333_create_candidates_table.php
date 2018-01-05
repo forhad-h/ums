@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAdmissionsTable extends Migration
+class CreateCandidatesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateAdmissionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('admissions', function (Blueprint $table) {
+        Schema::create('candidates', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 50);
             $table->string('phone', 30)->nullable();
@@ -23,9 +23,9 @@ class CreateAdmissionsTable extends Migration
             $table->string('email', 80)->nullable()->unique();
             $table->string('gender', 20);
             $table->string('bdate', 50);
-            $table->tinyInteger('subject_first');
-            $table->tinyInteger('subject_second');
-            $table->tinyInteger('subject_third');
+            $table->integer('subject_first');
+            $table->integer('subject_second');
+            $table->integer('subject_third');
             $table->text('caddress');
             $table->text('paddress');
             $table->string('nationality', 30);
@@ -44,6 +44,6 @@ class CreateAdmissionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('admissions');
+        Schema::dropIfExists('candidates');
     }
 }

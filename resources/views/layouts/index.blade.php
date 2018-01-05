@@ -354,21 +354,22 @@
         <li class="{{Request::is('students') ||
         Request::is('students/edit/*') ? 'active' : ''}}"><a href="{{url('students')}}"><i class="fa fa-user"></i> <span>Students</span></a></li>
         
-        <li class="{{Request::is('admission/form') ||
+        <li class="treeview{{Request::is('admission/form') ||
         Request::is('admission/candidate/*') ||
-        Request::is('candidate/view/*') ? 'active' : ''}}"><a href="{{url('admission/form')}}"><i class="fa fa-user"></i> <span>Admission</span></a></li>
-            
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-cogs"></i> <span>Settings</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="{{url('settings/personal')}}"><i class="fa fa-circle-o"></i>Persoal</a></li>
-          </ul>
+        Request::is('candidate/view/*') ? ' active' : ''}}">
+            <a href="#"><i class="fa fa-user"></i> <span>Admission</span>
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+                <li class="active"><a href="{{url('admission/candidates')}}"><i class="fa fa-circle-o"></i>Candidates</a></li>
+                <li><a href="{{url('admission/form')}}"><i class="fa fa-circle-o"></i>Form</a></li>
+            </ul>
         </li>
+            
+        <li class="{{Request::is('settings') ? 'active' : ''}}"><a href="{{url('settings')}}"><i class="fa fa-cogs"></i> <span>Settings</span></a></li>
+        
         <li class="header">ACCOUNT</li>
         <li class="{{(Request::is('teacher/view/*') && Auth::id() == @$select->id) || Request::is('edit-profile') ||  Request::is('view-profile/*')? 'active' : ''}}"><a href="{{url('view-profile/'.Auth::id())}}"><i class="fa fa-circle-o text-yellow"></i> <span>Profile</span></a></li>
         <li>
@@ -398,7 +399,7 @@
          
          @yield('admission-form');
          
-         @yield('personal-settings')
+         
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->

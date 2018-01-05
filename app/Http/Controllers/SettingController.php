@@ -5,17 +5,24 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use App\Role;
+use App\Subject;
 class SettingController extends Controller
 {
     public function __construct() {
         $this->middleware('auth');
     }
     
-    public function personal_settings() {
-        $select = DB::table('roles')
+    public function index() {
+        $select_role = DB::table('roles')
                       ->orderBy('id', 'DESC')
                       ->get();
-        return view('admin.settings.personal', compact('select'));
+        
+        $select_subject = DB::table('subjects')
+                          ->orderBy('id', 'DESC')
+                          ->get();
+        
+        return view('admin.settings.all',
+                compact(['select_role', 'select_subject']));
     }
     
     public function insert_role(Request $request) {
@@ -33,7 +40,7 @@ class SettingController extends Controller
             'permissions' => $permissions,
         ]);
         if($insert) {
-            return redirect('settings/personal')
+            return redirect('settings')
                     ->with('success-add', 'successfully added');
         }
     }
@@ -58,7 +65,49 @@ class SettingController extends Controller
       $delete = Role::where('id', '=', $id)
               ->delete();
       if($delete) {
-          return redirect('settings/personal')->with('success-delete', 'successful');
+          return redirect('settings')->with('success-delete', 'successful');
       }
     }
+    
+    public function insert_subject(Request $request) {
+        $validate = $request->validate([
+            'subject_code' => 'unique:subjects,subject_code|digits_between:1,20',
+            'subject_name' => 'required',
+            'course_fee' => 'required',
+        ]);
+        $insert = Subject::insert([
+            'subject_code' => $request->subject_code,
+            'subject_name' => $request->subject_name,
+            'course_fee' => $request->course_fee,
+        ]);
+        if($insert) {
+            return redirect('settings')
+                    ->with('success-add', 'successfully added');
+        }
+    }
+    
+    public function hide_subject($id) {
+        $hide = Subject::where('id', '=', $id)
+                        ->update([
+                            'status' => 0
+                        ]);
+        return $hide;
+    }
+    
+    public function show_subject($id) {
+        $show = Subject::where('id', '=', $id)
+                        ->update([
+                            'status' => 1
+                        ]);
+        return $show;
+    }
+    
+    public function delete_subject($id) {
+      $delete = Subject::where('id', '=', $id)
+              ->delete();
+      if($delete) {
+          return redirect('settings')->with('success-delete', 'successful');
+      }
+    }
+    
 }
