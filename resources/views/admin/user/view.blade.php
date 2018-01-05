@@ -15,8 +15,8 @@
         <div class="col-md-3">
             <div class="box box-primary">
                 <div class="box-body box-profile">
-                  @if(($select->image != '') && File::exists(public_path('asset/dist/uploads/').$select->image))
-                        <img class="profile-user-img img-responsive img-circle" src="{{asset('asset')}}/dist/uploads/{{$select->image}}" alt="User profile picture">
+                  @if(($select->image != '') && File::exists(public_path('asset/dist/uploads/users/').$select->image))
+                        <img class="profile-user-img img-responsive img-circle" src="{{asset('asset')}}/dist/uploads/users/{{$select->image}}" alt="User profile picture">
                     @else
                       @if(Auth::user()->gender == 'female')
                            <img class="profile-user-img img-responsive img-circle" src="{{asset('asset')}}/dist/img/defaultf.jpg" alt="User profile picture"> 
@@ -73,7 +73,7 @@
                     @endif
                 </div>
                 <!-- /.box-header -->
-                <div class="box-body viewtwice">
+                <div class="box-body view-structure">
                     <strong>ID</strong>
                     <p><span class="text-muted"> &DoubleLeftRightArrow;</span>{{$select->id}}</p><br>
                     

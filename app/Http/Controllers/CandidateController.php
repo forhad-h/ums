@@ -6,12 +6,12 @@ use Illuminate\Http\Request;
 use DB;
 use App\Candidate;
 use App\Qualification;
-use Image;
+use App\Student;
 
 class CandidateController extends Controller
 {
     public function __construct() {
-        //
+        $this->middleware('auth');
     }
     
     public function all() {
@@ -24,82 +24,6 @@ class CandidateController extends Controller
         return view('admission.all', compact('select'));
     }
     
-    public function admission_form() {
-        $select_subject = DB::table('subjects')
-                              ->where('status', 1)
-                              ->get();
-        return view('admission.form', compact('select_subject'));
-    }
-    
-    private function insert_field($request) {
-        return  [
-                    'name' => $request->name,
-                    'phone' => $request->phone,
-                    'gname' => $request->gname,
-                    'gphone' => $request->gphone,
-                    'nid' => $request->nid,
-                    'email' => $request->email,
-                    'gender' => $request->gender,
-                    'bdate' => $request->bdate,
-                    'subject_first' => $request->subject_first,
-                    'subject_second' => $request->subject_second,
-                    'subject_third' => $request->subject_third,
-                    'caddress' => $request->caddress,
-                    'paddress' => $request->paddress,
-                    'nationality' => $request->nationality,
-                    'religion' => $request->religion,
-                ];
-    }
-    
-    private function q_field($request, $id) {
-        return  [
-                    'candidate_id' => $id,
-                    'course_type' => $request->courset,
-                    'institute' => $request->cfrom,
-                    'result' => $request->cresult,
-                    'passing_year' => $request->pyear,
-                ];
-    }
-    
-    private function save_image($request, $id, $field_name, $column_name)
-    {
-        if($request->hasFile("{$field_name}") && $id > 0) {
-            
-            $image = $request->file("{$field_name}");
-            $image_name = 'candidate-'.$field_name.$id.'-'.time().
-                          '.'.$image->getClientOriginalExtension();
-            
-            $image_path = public_path('asset/dist/uploads/').$image_name;
-            $image_obj = Image::make($image);
-            $saveImage = $image_obj->resize(null, 120, function($constraint) {
-                $constraint->aspectRatio();
-            })->save($image_path);
-            if($saveImage) {
-                    $add_img_url = Candidate::where('id', '=', $id)
-                                       ->update([
-                                           "{$column_name}" => $image_name,
-                                       ]);
-                    return $add_img_url;
-            }
-        }
-    }
-    
-    public function insert(Request $request) {
-        $insert = Candidate::insertGetId(
-                    $this->insert_field($request)
-                  );
-        
-        $insert_q = Qualification::insert(
-                     $this->q_field($request, $insert)
-                  );
-        $save_image = $this->save_image($request, $insert, 'image', 'image');
-        $save_signature = $this->save_image($request, $insert, 'signature', 'simage');
-        
-        if(($insert > 0) && $insert_q && $save_image && $save_signature) {
-            return redirect('admission/form')->with('success-add', 'successfully added');
-        }
-    }
-    
     public function add_marks(Request $request) {
         $update = Qualification::where('candidate_id', '=', $request->id)
                                 ->update([
@@ -108,5 +32,70 @@ class CandidateController extends Controller
         if($update) {
             return redirect('admission/candidates');
         }
+    }
+    
+    public function select($id) {
+        $select = Candidate::findOrFail($id);
+        
+        $select_subject = DB::table('subjects')
+                              ->where('status', 1)
+                              ->get();
+        
+        return view('admin.student.select', compact(['select', 'select_subject']));
+    }
+    
+    
+    private function add_field($request, $select) {
+        return  [
+                    'name' => $select->name,
+                    'phone' => $select->phone,
+                    'gname' => $select->gname,
+                    'gphone' => $select->gphone,
+                    'nid' => $select->nid,
+                    'email' => $select->email,
+                    'gender' => $select->gender,
+                    'bdate' => $select->bdate,
+                    'caddress' => $select->caddress,
+                    'paddress' => $select->paddress,
+                    'nationality' => $select->nationality,
+                    'religion' => $select->religion,
+                    'image' => str_replace('candidate', 'student', $select->image),
+                    'simage' => str_replace('candidate', 'student', $select->simage),
+                    'session' => $request->session,
+                    'session_name' => $request->session_name,
+                    'subject' => $request->subject,
+                    'adate' => $request->adate,
+                ];
+    }
+    private function move_img($select, $image) {
+        return rename(
+                    public_path('asset/dist/uploads/candidates/').$select->$image,
+                    public_path('asset/dist/uploads/students/').
+                    str_replace('candidate', 'student', $select->$image)
+               );
+    }
+    public function add(Request $request) {
+        $id = $request->id;
+        $select_candidate = Candidate::findOrFail($id);
+        
+       $add = Student::insert(
+                       $this->add_field($request, $select_candidate)
+               );
+       
+       $move_image = $this->move_img($select_candidate, 'image');
+       $move_signature = $this->move_img($select_candidate, 'simage');
+       
+       if($add && $move_image && $move_signature) {
+           $selected = Candidate::where('id', '=', $id)
+                                ->update([
+                                    'status' => 2,
+                                ]);
+           if($selected) {
+               return redirect('admission/candidates')->with('success-add', 'successful');
+           }
+       }
+    }
+    public function omit() {
+        
     }
 }

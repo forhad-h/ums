@@ -14,7 +14,7 @@ class CreateQualificationsTable extends Migration
     public function up()
     {
         Schema::create('qualifications', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('qua_id');
             $table->integer('candidate_id');
             $table->string('course_type', 80);
             $table->string('institute', 150);

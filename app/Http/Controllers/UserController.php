@@ -77,7 +77,7 @@ class UserController extends Controller
             $image = $request->file('ppic');
             $image_name = 'user-'.$id.'-'.time().
                           '.'.$image->getClientOriginalExtension();
-            $image_path = public_path('asset/dist/uploads/').$image_name;
+            $image_path = public_path('asset/dist/uploads/users/').$image_name;
             $image_obj = Image::make($image);
             $saveImage = $image_obj->resize(null, 120, function($constraint) {
                 $constraint->aspectRatio();

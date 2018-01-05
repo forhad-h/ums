@@ -29,8 +29,9 @@ Route::get('/view-profile/{id}', 'UserController@view')->name('viewTeacher');
 
 Route::get('/students', 'StudentController@index')->name('allStudents');
 
-Route::get('/admission/form', 'CandidateController@admission_form')->name('admissionForm');
+Route::get('/admission/form', 'AdmissionController@admission_form')->name('admissionForm');
 Route::get('/admission/candidates', 'CandidateController@all')->name('allCandidates');
+Route::get('/candidate/select/{id}', 'CandidateController@select')->name('selectCandidates');
 
 Route::get('/settings', 'SettingController@index')->name('personalSettings');
 
@@ -40,8 +41,10 @@ Route::post('/teacher/update', 'UserController@update')->name('updateTeacher');
 Route::get('/teacher/soft-delete/{id}', 'UserController@soft_delete')->name('softDeleteTeacher');
 Route::post('/teacher/update-profile', 'UserController@update_profile')->name('updateProfile');
 
-Route::post('/candidate/insert', 'CandidateController@insert')->name('insertCandidate');
+Route::post('/candidate/insert', 'AdmissionController@insert')->name('insertCandidate');
 Route::post('/candidate/add-marks', 'CandidateController@add_marks')->name('addMarks');
+Route::post('/candidate/add', 'CandidateController@add')->name('addStudent');
+
 
 Route::post('/role/insert', 'SettingController@insert_role')->name('insertRole');
 Route::get('/role/hide/{id}', 'SettingController@hide_role')->name('hideRole');

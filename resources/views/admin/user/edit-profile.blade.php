@@ -21,8 +21,8 @@
         <div class="box-body body0">
             <div class="row">
                 <div class="form-group vpi">
-                    @if((Auth::user()->image != '') && File::exists(public_path('asset/dist/uploads/').Auth::user()->image))
-                        <img class="profile-user-img img-responsive" src="{{asset('asset')}}/dist/uploads/{{Auth::user()->image}}" alt="User profile picture">
+                    @if((Auth::user()->image != '') && File::exists(public_path('asset/dist/uploads/users/').Auth::user()->image))
+                        <img class="profile-user-img img-responsive" src="{{asset('asset')}}/dist/uploads/users/{{Auth::user()->image}}" alt="User profile picture">
                     @else
                       @if(Auth::user()->gender == 'female')
                            <img class="profile-user-img img-responsive" src="{{asset('asset')}}/dist/img/defaultf.jpg" alt="User profile picture"> 

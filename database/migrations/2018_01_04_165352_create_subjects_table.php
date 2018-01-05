@@ -14,7 +14,7 @@ class CreateSubjectsTable extends Migration
     public function up()
     {
         Schema::create('subjects', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('subject_id');
             $table->integer('subject_code');
             $table->string('subject_name', 40);
             $table->integer('course_fee');

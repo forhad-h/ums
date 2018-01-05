@@ -64,22 +64,22 @@
                     <div class="form-group{{ $errors->has('courset') ? ' has-error' : '' }}">
                         <select name="courset" id="courset" class="form-control select2" style="width: 100%;">
                             <option value="">Select course type</option>
-                            @if(old('courset') == 'hsc')
-                                <option value="hsc" selected>HSC</option>
+                            @if(old('courset') == 'HSC')
+                                <option value="HSC" selected>HSC</option>
                             @else
-                                <option value="hsc">HSC</option>
+                                <option value="HSC">HSC</option>
                             @endif
                             
-                            @if(old('courset') == 'alim')
-                                <option value="alim" selected>Alim</option>
+                            @if(old('courset') == 'Alim')
+                                <option value="Alim" selected>Alim</option>
                             @else
-                                <option value="alim">Alim</option>
+                                <option value="Alim">Alim</option>
                             @endif
                             
-                            @if(old('courset') == 'diploma')
-                                <option value="diploma" selected>Diploma</option>
+                            @if(old('courset') == 'Diploma')
+                                <option value="Diploma" selected>Diploma</option>
                             @else
-                                <option value="diploma">Diploma</option>
+                                <option value="Diploma">Diploma</option>
                             @endif
                             
                         </select>
@@ -155,7 +155,7 @@
                     </div>
                     
                     <div class="form-group{{ $errors->has('gphone') ? ' has-error' : '' }}">
-                        <label for="gphone">Gaurdian phone <span class="text-require">(require)</span></label>
+                        <label for="gphone">Guardian phone <span class="text-require">(require)</span></label>
                         <input type="text" class="form-control" id="gphone" name="gphone" value="{{old('gname')}}" placeholder="Enter guardian phone number">
                         @if ($errors->has('gphone'))
                             <span class="help-block">

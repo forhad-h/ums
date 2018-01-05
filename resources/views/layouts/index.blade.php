@@ -399,6 +399,8 @@
          
          @yield('admission-form');
          
+         @yield('select')
+         
          
     <!-- /.content -->
   </div>

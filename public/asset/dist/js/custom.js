@@ -17,6 +17,11 @@ $(document).ready(function(){
 	  autoclose: true,
 	  format: 'd MM yyyy'
 	})
+	
+	$('#adate').datepicker({
+	  autoclose: true,
+	  format: 'd MM yyyy'
+	})
 
 	//iCheck for checkbox and radio inputs
 	$('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({

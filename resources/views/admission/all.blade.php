@@ -22,20 +22,21 @@
         <tbody>
         @foreach($select as $data)
         <tr>
-          <td>{{$data->id}}</td>
+          <td>{{$data->candidate_id}}</td>
           <td>{{$data->name}}</td>
           <td>{{$data->phone}}</td>
           <td>{{$data->institute}}</td>
           <td>{{$data->result}}</td>
           @if($data->marks != '')
-              <td>{{$data->marks}}</td>
+              <td>{{$data->marks}}<a href="{{route('addMarks', ['id' => $data->id])}}" class="btn-inner" data-toggle="modal" data-target="#add-marks" onclick="setAction(this);"><i class="fa fa-refresh"></i></a></td>
           @else
-          <td><a href="{{route('addMarks', ['id' => $data->candidate_id])}}" class="btn btn-info" data-toggle="modal" data-target="#add-marks" onclick="setAction(this);"><i class="fa fa-plus"></i></a></td>
+          <td><a href="{{route('addMarks', ['id' => $data->id])}}" class="btn-add" data-toggle="modal" data-target="#add-marks" onclick="setAction(this);"><i class="fa fa-plus-circle"></i></a></td>
           @endif
           <td class="manage-btn">
-                  <a href="{{url('teacher/view/'.$data->id)}}" class="btn btn-success"><i class="fa fa-eye fa-lg"></i></a>
-                  <a href="{{url('teacher/edit/'.$data->id)}}" class="btn btn-warning"><i class="fa fa-pencil fa-lg"></i></a>
-                  <a href="{{url('teacher/soft-delete/'.$data->id)}}" onclick="event.preventDefault();confirmBox(this, 'soft-delete');" class="btn btn-danger"><i class="fa fa-trash fa-lg"></i></a>
+              @if($data->marks >= 40)
+                <a href="{{url('candidate/select/'.$data->id)}}" class="btn btn-success"><i class="fa fa-check fa-lg"></i></a>
+              @endif
+                <a href="{{url('candidate/omit/'.$data->id)}}" onclick="event.preventDefault();confirmBox(this, 'soft-delete');" class="btn btn-danger"><i class="fa fa-close fa-lg"></i></a>
           </td>
         </tr>
         @endforeach
