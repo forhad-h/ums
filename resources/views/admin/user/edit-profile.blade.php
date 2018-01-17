@@ -179,8 +179,8 @@
                         @endif
                     </div>
                 </div>
-                <div class="col-sm-6 custom-padding{{ $errors->has('experience') ? ' has-error' : '' }}">
-                    <div class="form-group">
+                <div class="col-sm-6 custom-padding">
+                    <div class="form-group{{ $errors->has('experience') ? ' has-error' : '' }}">
                         <label for="experience">Experience</label>
                         <textarea class="form-control" id="experience" name="experience" rows="3" placeholder="Enter your experience">{{Auth::user()->experience}}</textarea>
                         @if ($errors->has('experience'))

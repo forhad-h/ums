@@ -18,7 +18,7 @@ class AdmissionController extends Controller
         $select_subject = DB::table('subjects')
                               ->where('status', 1)
                               ->get();
-        return view('admission.form', compact('select_subject'));
+        return view('admin.admission.form', compact('select_subject'));
     }
     
     private function insert_field($request) {

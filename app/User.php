@@ -36,4 +36,8 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Education');
     }
+    
+    public function salaryM() {
+        return $this->hasOne('App\TSalary');
+    }
 }

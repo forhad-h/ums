@@ -32,7 +32,7 @@ class CreateCandidatesTable extends Migration
             $table->string('religion', 30);
             $table->string('image', 100);
             $table->string('simage', 100);
-            $table->tinyInteger('status')->default(1);
+            $table->tinyInteger('status')->default(2);
             $table->timestamps();
         });
     }

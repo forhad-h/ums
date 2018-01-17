@@ -14,14 +14,26 @@ class CandidateController extends Controller
         $this->middleware('auth');
     }
     
-    public function all() {
-        $select = DB::table('candidates')
+    private function select_candidate($status) {
+        return DB::table('candidates')
                 ->leftJoin('qualifications', 'candidates.id', '=', 'qualifications.candidate_id')
                 ->select('candidates.*', 'qualifications.*')
-                ->where('candidates.status', '=', 1)
+                ->where('candidates.status', '=', $status)
                 ->get();
-        
+    }
+    public function all() {
+        $select = $this->select_candidate(2);
         return view('admission.all', compact('select'));
+    }
+    
+    public function selected() {
+        $select = $this->select_candidate(1);
+        return view('admin.admission.selected', compact('select'));
+    }
+    
+    public function rejected() {
+        $select = $this->select_candidate(0);
+        return view('admin.admission.rejected', compact('select'));
     }
     
     public function add_marks(Request $request) {
@@ -41,9 +53,18 @@ class CandidateController extends Controller
                               ->where('status', 1)
                               ->get();
         
-        return view('admin.student.select', compact(['select', 'select_subject']));
+        return view('admin.admission.select', compact(['select', 'select_subject']));
     }
     
+    public function reject($id) {
+        $reject = Candidate::where('id', '=', $id)
+                           ->update([
+                               'status' => 0,
+                           ]);
+        if($reject) {
+            return redirect('admission/candidates');
+        }
+    }
     
     private function add_field($request, $select) {
         return  [
@@ -88,14 +109,11 @@ class CandidateController extends Controller
        if($add && $move_image && $move_signature) {
            $selected = Candidate::where('id', '=', $id)
                                 ->update([
-                                    'status' => 2,
+                                    'status' => 1,
                                 ]);
            if($selected) {
                return redirect('admission/candidates')->with('success-add', 'successful');
            }
        }
-    }
-    public function omit() {
-        
     }
 }

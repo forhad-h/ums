@@ -156,7 +156,7 @@
                     
                     <div class="form-group{{ $errors->has('gphone') ? ' has-error' : '' }}">
                         <label for="gphone">Guardian phone <span class="text-require">(require)</span></label>
-                        <input type="text" class="form-control" id="gphone" name="gphone" value="{{old('gname')}}" placeholder="Enter guardian phone number">
+                        <input type="text" class="form-control" id="gphone" name="gphone" value="{{old('gphone')}}" placeholder="Enter guardian phone number">
                         @if ($errors->has('gphone'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('gphone') }}</strong>

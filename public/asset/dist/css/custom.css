@@ -79,15 +79,25 @@
 .view-structure {
 	padding: 25px;
 }
-.view-structure > strong {
+.view-structure strong {
 	min-width: 150px;
     display: inline-block;
 }
-.view-structure > p {
+.view-structure p {
 	display: inline-block;
 }
-.view-structure > p > span {
+.view-structure p > span {
 	margin-right: 15px;
+}
+.view-structure .date strong {
+	min-width: 42px;
+	text-decoration: underline;
+}
+.view-structure.receipt-body {
+	min-width: 115px;
+}
+.view-structure.receipt-body strong.small-strong {
+	min-width: 85px;
 }
 .vpi {
 	left: 25%;
@@ -176,4 +186,14 @@ input[type="file"]#ppic {
 	width: 120px;
 	height: auto;
 	display: inline-block;
+}
+.checkbox label {
+	padding-left: 0;
+}
+.icheckbox_minimal-blue {
+	margin-right: 10px;
+}
+
+.receipt-header {
+	text-align: center;
 }

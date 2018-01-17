@@ -352,7 +352,10 @@
         Auth::id() != @$select->id) ? 'active' : ''}}"><a href="{{url('teachers')}}"><i class="fa fa-user"></i> <span>Teachers</span></a></li>
 
         <li class="{{Request::is('students') ||
-        Request::is('students/edit/*') ? 'active' : ''}}"><a href="{{url('students')}}"><i class="fa fa-user"></i> <span>Students</span></a></li>
+        Request::is('student/edit/*') ? 'active' : ''}}"><a href="{{url('students')}}"><i class="fa fa-user"></i> <span>Students</span></a></li>
+        
+        <li class="{{Request::is('employees') ||
+        Request::is('employee/edit/*') ? 'active' : ''}}"><a href="{{url('employees')}}"><i class="fa fa-user"></i> <span>Employees</span></a></li>
         
         <li class="treeview{{Request::is('admission/form') ||
         Request::is('admission/candidate/*') ||
@@ -363,8 +366,24 @@
                 </span>
             </a>
             <ul class="treeview-menu">
-                <li class="active"><a href="{{url('admission/candidates')}}"><i class="fa fa-circle-o"></i>Candidates</a></li>
+                <li><a href="{{url('admission/candidates')}}"><i class="fa fa-circle-o"></i>Candidates</a></li>
+                <li><a href="{{url('admission/selected')}}"><i class="fa fa-circle-o"></i>Selected</a></li>
+                <li><a href="{{url('admission/rejected')}}"><i class="fa fa-circle-o"></i>Rejected</a></li>
                 <li><a href="{{url('admission/form')}}"><i class="fa fa-circle-o"></i>Form</a></li>
+            </ul>
+        </li>
+        
+        <li class="treeview">
+            <a href="#"><i class="fa fa-user"></i> <span>Financial</span>
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+                <li><a href="{{url('payments')}}"><i class="fa fa-circle-o"></i>Students payment</a></li>
+                <li><a href="{{url('teachers-salary')}}"><i class="fa fa-circle-o"></i>Teachers salary</a></li>
+                <li><a href="{{url('employees-salary')}}"><i class="fa fa-circle-o"></i>Employees salary</a></li>
+                <li><a href="{{url('f-others')}}"><i class="fa fa-circle-o"></i>Others</a></li>
             </ul>
         </li>
             
@@ -397,7 +416,9 @@
          @yield('edit-profile')
          @yield('view')
          
-         @yield('admission-form');
+         @yield('admission-form')
+         
+         @yield('add')
          
          @yield('select')
          
@@ -649,6 +670,8 @@
 <script src="{{asset('asset')}}/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <!-- Select2 -->
 <script src="{{asset('asset')}}/bower_components/select2/dist/js/select2.full.min.js"></script>
+<!-- AdminLTE App -->
+<script src="{{asset('asset')}}/dist/js/adminlte.min.js"></script>
 <!-- SweetAlert -->
 <script src="{{asset('asset')}}/bower_components/bootstrap-sweetalert/dist/sweetalert.min.js"></script>
 @if(session('success-add'))
@@ -668,9 +691,6 @@
         swal("Success", "One record has been deleted.", "success");
     </script>
 @endif
-
-<!-- AdminLTE App -->
-<script src="{{asset('asset')}}/dist/js/adminlte.min.js"></script>
 <script src="{{asset('asset')}}/dist/js/custom.js"></script>
 </body>
 </html>

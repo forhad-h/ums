@@ -1,6 +1,7 @@
 $(document).ready(function(){
 	//data table
 	$('#allTeacher').DataTable();
+	$('#allEmployees').DataTable();
 	
 	//Initialize Select2 Elements
 	$('.select2').select2({
@@ -9,6 +10,11 @@ $(document).ready(function(){
 
 	//Date picker
 	$('#joining_date').datepicker({
+	  autoclose: true,
+	  format: 'd MM yyyy'
+	})
+	
+	$('#payment_date').datepicker({
 	  autoclose: true,
 	  format: 'd MM yyyy'
 	})
@@ -38,7 +44,18 @@ $(document).ready(function(){
 			{'transform' : 'rotate(0deg)', '-o-transform' : 'rotate(0deg)', '-ms-transform' : 'rotate(0deg)', '-webkit-transform' : 'rotate(0deg)'})
 		}
 	});
+	
+	$('#cb-for-hf, #cb-for-hf ins').on('click', function() {
+		var isChecked = ($('#cb-for-hf').children('div:first-child').attr('aria-checked')
+		                 == 'true');
+		if(!isChecked) {
+			$('#hidden-field').hide();
+		}else {
+			$('#hidden-field').show();
+		}
+	});
 });
+
 function confirmBox(thisElm, dType) {
 	var oText = '';
 	if(dType == 'delete') {

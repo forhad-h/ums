@@ -55,7 +55,7 @@
                                     @endif
                             </div>
                             
-                            <div class="form-group{{ $errors->has('designation') || $errors->has('designation') ? ' has-error' : '' }}">
+                            <div class="form-group{{ $errors->has('designation') ? ' has-error' : '' }}">
                                 <label for="designation">Designation</label>
                                 <input type="text" class="form-control" id="designation" name="designation" value="{{old('designation')}}">
                                 @if ($errors->has('designation'))
@@ -186,7 +186,7 @@
           <td>{{$data->role_name}}</td>
           <td>{{$data->joining_date}}</td>
           <td class="manage-btn">
-              @if($data->id == Auth::user()->id)
+              @if(Request::is('teachers') && ($data->id == Auth::user()->id))
                   <a href="{{url('view-profile/'.Auth::user()->id)}}" class="btn btn-success"><i class="fa fa-eye fa-lg"></i></a>
                   <a href="{{url('edit-profile')}}" class="btn btn-warning"><i class="fa fa-pencil fa-lg"></i></a>
               @else
