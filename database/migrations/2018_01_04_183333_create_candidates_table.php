@@ -19,7 +19,7 @@ class CreateCandidatesTable extends Migration
             $table->string('phone', 30)->nullable();
             $table->string('gname', 50);
             $table->string('gphone', 30);
-            $table->string('nid', 50)->nullable();
+            $table->string('nid', 150)->nullable();
             $table->string('email', 80)->nullable()->unique();
             $table->string('gender', 20);
             $table->string('bdate', 50);
@@ -28,10 +28,10 @@ class CreateCandidatesTable extends Migration
             $table->integer('subject_third');
             $table->text('caddress');
             $table->text('paddress');
-            $table->string('nationality', 30);
-            $table->string('religion', 30);
-            $table->string('image', 100);
-            $table->string('simage', 100);
+            $table->string('nationality', 30)->nullable();
+            $table->string('religion', 30)->nullable();
+            $table->string('image', 100)->nullable();
+            $table->string('simage', 100)->nullable();
             $table->tinyInteger('status')->default(2);
             $table->timestamps();
         });

@@ -1,76 +1,150 @@
 @extends('layouts.index')
 @section('all')
+<section class="content-header">
+  <h5>
+      {{ Breadcrumbs::render('admissions') }}
+  </h5>
+</section>
 <section class="content">
+    <div id="accordion">
+    <div class="panel panel-default">
+        <div class="panel-heading text-center add-pheading" role="tab" id="heading">
+          <h4 class="panel-title">
+              <a class="btn btn-success{{$errors->all() ? '' : ' collapsed'}}" id="btn-add" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsesec" aria-expanded="{{$errors->all() || session('success-add') ? 'true' : 'false'}}" aria-controls="collapsesec">
+              Start admission
+              
+              <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+          </h4>
+        </div>
+        <div id="collapsesec" class="panel-collapse collapse{{$errors->all() ? ' in' : ''}}" role="tabpanel" aria-labelledby="heading">
+               <form enctype="multipart/form-data" action="{{url('admission/insert')}}" method="post">
+                   {{csrf_field()}}
+                    <div class="panel-body  body0">
+                        <div class="col-sm-6 col-sm-offset-3 custom-padding">
+                            <div class="form-group{{ $errors->has('session_year') ? ' has-error' : '' }}">
+                                <label for="session_year">Session year <span class="text-require">(require)</span></label>
+                                <input type="text" class="form-control" id="session_year" name="session_year" value="{{old('session_year')}}" placeholder="Enter session year">
+                                @if ($errors->has('session_year'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('session_year') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                            
+							<div class="form-group{{ $errors->has('session_name') ? ' has-error' : '' }}">
+								<label for="session_name">Session name <span class="text-require">(require)</span></label>
+								
+								<select name="session_name" id="session_name" class="form-control select2" style="width: 100%;">
+									<option value="">Select session name</option>
+									@if(old('session_name') == 'Summer')
+										<option value="Summer" selected>Summer</option>
+									@else
+										<option value="Summer">Summer</option>
+									@endif
+									
+									@if(old('session_name') == 'Winter')
+										<option value="Winter" selected>Winter</option>
+									@else
+										<option value="Winter">Winter</option>
+									@endif
+									
+									@if(old('session_name') == 'Fall')
+										<option value="Fall" selected>Fall</option>
+									@else
+										<option value="Fall">Fall</option>
+									@endif
+									
+								</select>
+								@if ($errors->has('session_name'))
+									<span class="help-block">
+										<strong>{{ $errors->first('session_name') }}</strong>
+									</span>
+								@endif
+							</div>
+                            
+                            <div class="form-group{{ $errors->has('start_date') ? ' has-error' : '' }}">
+                                <label for="start_date">Start date <span class="text-require">(require)</span></label>
+
+                                <div class="input-group date">
+                                  <div class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                  </div>
+                                  <input type="text" class="form-control  pull-right" id="start_date" name="start_date" value="{{old('start_date')}}" placeholder="01 January 2001">
+                                </div>
+								@if ($errors->has('start_date'))
+									<span class="help-block">
+										<strong>{{ $errors->first('start_date') }}</strong>
+									</span>
+								@endif
+                                <!-- /.input group -->
+                            </div>
+                            
+                            <div class="form-group{{ $errors->has('end_date') ? ' has-error' : '' }}">
+                                <label for="end_date">End date <span class="text-require">(require)</span></label>
+
+                                <div class="input-group date">
+                                  <div class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                  </div>
+                                  <input type="text" class="form-control  pull-right" id="end_date" name="end_date" value="{{old('end_date')}}" placeholder="01 January 2001">
+                                </div>
+								@if ($errors->has('end_date'))
+									<span class="help-block">
+										<strong>{{ $errors->first('end_date') }}</strong>
+									</span>
+								@endif
+                                <!-- /.input group -->
+                            </div>
+                        </div>
+                    </div>
+                   <div class="panel-footer footer0">
+                    <div class="form-group text-center">
+                        <button type="submit" class="btn btn-lg btn-info">Start</button>
+                    </div>
+                   </div>
+              </form> 
+        </div>
+    </div>
+    </div>
   <div class="box box-primary">
     <div class="box-header">
-      <h3 class="box-title">All candidates</h3>
+      <h3 class="box-title">All admission</h3>
     </div>
     <!-- /.box-header -->
     <div class="box-body">
       <table id="allTeacher" class="table table-bordered table-striped">
         <thead>
         <tr>
-          <th>Roll no.</th>
-          <th>Name</th>
-          <th>Phone</th>
-          <th>Institute</th>
-          <th>Result</th>
-          <th>Marks</th>
+          <th>Session year</th>
+          <th>Session name</th>
+          <th>Start date</th>
+          <th>End date</th>
           <th>Manage</th>
         </tr>
         </thead>
         <tbody>
         @foreach($select as $data)
         <tr>
-          <td>{{$data->candidate_id}}</td>
-          <td>{{$data->name}}</td>
-          <td>{{$data->phone}}</td>
-          <td>{{$data->institute}}</td>
-          <td>{{$data->result}}</td>
-          @if($data->marks != '')
-              <td>{{$data->marks}}<a href="{{route('addMarks', ['id' => $data->id])}}" class="btn-inner" data-toggle="modal" data-target="#add-marks" onclick="setAction(this);"><i class="fa fa-refresh"></i></a></td>
-          @else
-          <td><a href="{{route('addMarks', ['id' => $data->id])}}" class="btn-add" data-toggle="modal" data-target="#add-marks" onclick="setAction(this);"><i class="fa fa-plus-circle"></i></a></td>
-          @endif
+          <td>{{$data->session_year}}</td>
+          <td>{{$data->session_name}}</td>
+          <td>{{$data->start_date}}</td>
+          <td>{{$data->end_date}}</td>
           <td class="manage-btn">
-              @if($data->marks >= 40)
-                <a href="{{url('candidate/select/'.$data->id)}}" class="btn btn-success"><i class="fa fa-check fa-lg"></i></a>
-              @endif
-                <a href="{{url('candidate/reject/'.$data->id)}}" onclick="event.preventDefault();confirmBox(this, 'soft-delete');" class="btn btn-danger"><i class="fa fa-close fa-lg"></i></a>
+                  <a href="{{url('admission/view/'.$data->admission_id)}}" class="btn btn-success"><i class="fa fa-eye fa-lg" data-toggle="tooltip" title="View admission"></i></a>
+				  
+                  <a href="{{url('admission/edit/'.$data->admission_id)}}" class="btn btn-warning" data-toggle="tooltip" title="Edit teacher"><i class="fa fa-pencil fa-lg"></i></a>
+				  
+                  <a href="{{url('admission/soft-delete/'.$data->admission_id)}}" onclick="event.preventDefault();confirmBox(this, 'soft-delete');" class="btn btn-danger" data-toggle="tooltip" title="Delete admission"><i class="fa fa-trash fa-lg"></i></a>
           </td>
         </tr>
         @endforeach
       </table>
     </div>
-    
-        <div class="modal fade" id="add-marks">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Add marks</h4>
-              </div>
-                <form method="post" action="#" id="am-form">
-                    {{csrf_field()}}
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="marks">Marks</label>
-                            <input type="text" id="marks" name="marks" class="form-control" placeholder="Enter marks">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-                      <button type="submit" class="btn btn-primary">Save</button>
-                    </div>
-                </form>
-            </div>
-            <!-- /.modal-content -->
-          </div>
-          <!-- /.modal-dialog -->
-        </div>
-        <!-- /.modal -->
     <!-- /.box-body -->
   </div>
+  <!-- /.box -->
 </section>
 @endsection

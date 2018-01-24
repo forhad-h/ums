@@ -7,12 +7,75 @@ use DB;
 use App\Candidate;
 use App\Qualification;
 use Image;
+use App\Http\Requests\AFormRequest;
+use App\Admission;
 
 class AdmissionController extends Controller
 {
     public function __construct() {
         //
     }
+    public function index() {
+        $select = DB::table('admissions')
+                   ->where('status', '=', 1)
+                   ->get();
+        return view('admin.admission.all', compact('select'));
+    }
+    
+    public function view($id) {
+        $select = Admission::findOrFail($id);
+        return view('admin.admission.view', compact('select'));
+    }
+    
+    public function edit($id) {
+        $select = Admission::findOrFail($id);
+        return view('admin.admission.edit', compact('select'));
+    }
+    
+    public function update(Request $request) {
+        $id = $request->id;
+        $update = Admission::where('admission_id', '=', $id)
+                  ->update([
+                      'session_year' => $request->session_year,
+                      'session_name' => $request->session_name,
+                      'start_date' => $request->start_date,
+                      'end_date' => $request->end_date,
+                  ]);
+        if($update) {
+            return redirect('admission/edit/'.$id)->with('success-update', 'successful');
+        }
+        
+    }
+    
+    public function soft_delete($id) {
+        $soft_delete = Admission::where('admission_id', '=', $id)
+                        ->update([
+                            'status' => 0
+                        ]);
+        if($soft_delete) {
+            return redirect('admissions')->with('success-delete', 'successful');
+        }
+    }
+    
+    public function insert(Request $request) {
+        $validate = $request->validate([
+            'session_year' => 'required',
+            'session_name' => 'required',
+            'start_date' => 'required',
+            'end_date' => 'required',
+        ]);
+        $insert = Admission::insert([
+            'session_year' => $request->session_year,
+            'session_name' => $request->session_name,
+            'start_date' => $request->start_date,
+            'end_date' => $request->end_date,
+        ]);
+        if($insert) {
+            return redirect('admissions')->with('success-add', 'succesful add');
+        }
+    }
+    
+
     
     public function admission_form() {
         $select_subject = DB::table('subjects')
@@ -74,7 +137,7 @@ class AdmissionController extends Controller
         }
     }
     
-    public function insert(Request $request) {
+    public function c_insert(AFormRequest $request) {
         $insert = Candidate::insertGetId(
                     $this->insert_field($request)
                   );

@@ -23,26 +23,29 @@ class CandidateController extends Controller
     }
     public function all() {
         $select = $this->select_candidate(2);
-        return view('admission.all', compact('select'));
+        return view('admin.candidate.all', compact('select'));
     }
     
     public function selected() {
         $select = $this->select_candidate(1);
-        return view('admin.admission.selected', compact('select'));
+        return view('admin.candidate.selected', compact('select'));
     }
     
     public function rejected() {
         $select = $this->select_candidate(0);
-        return view('admin.admission.rejected', compact('select'));
+        return view('admin.candidate.rejected', compact('select'));
     }
     
     public function add_marks(Request $request) {
+        $validate = $request->validate([
+            'marks' => 'required|integer',
+        ]);
         $update = Qualification::where('candidate_id', '=', $request->id)
                                 ->update([
                                     'marks' => $request->marks,
                                 ]);
         if($update) {
-            return redirect('admission/candidates');
+            return redirect('candidates');
         }
     }
     
@@ -53,7 +56,7 @@ class CandidateController extends Controller
                               ->where('status', 1)
                               ->get();
         
-        return view('admin.admission.select', compact(['select', 'select_subject']));
+        return view('admin.candidate.select', compact(['select', 'select_subject']));
     }
     
     public function reject($id) {
@@ -62,7 +65,7 @@ class CandidateController extends Controller
                                'status' => 0,
                            ]);
         if($reject) {
-            return redirect('admission/candidates');
+            return redirect('candidates');
         }
     }
     
@@ -82,7 +85,7 @@ class CandidateController extends Controller
                     'religion' => $select->religion,
                     'image' => str_replace('candidate', 'student', $select->image),
                     'simage' => str_replace('candidate', 'student', $select->simage),
-                    'session' => $request->session,
+                    'session_year' => $request->session_year,
                     'session_name' => $request->session_name,
                     'subject' => $request->subject,
                     'adate' => $request->adate,
@@ -97,6 +100,14 @@ class CandidateController extends Controller
     }
     public function add(Request $request) {
         $id = $request->id;
+        $validate = $request->validate([
+            'session_year' => 'required|string|max:80',
+            'session_name' => 'required|string|max:20',
+            'subject' => 'required',
+            'adate' => 'required|max:50',
+        ], [
+            'adate.required' => 'Admitting date is required',
+        ]);
         $select_candidate = Candidate::findOrFail($id);
         
        $add = Student::insert(
@@ -112,7 +123,7 @@ class CandidateController extends Controller
                                     'status' => 1,
                                 ]);
            if($selected) {
-               return redirect('admission/candidates')->with('success-add', 'successful');
+               return redirect('candidates')->with('success-add', 'successful');
            }
        }
     }

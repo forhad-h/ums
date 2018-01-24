@@ -7,11 +7,11 @@
   </h5>
 </section>
 <section class="content">
-        <div class="box box-primary  collapsed-box">
+        <div class="box box-default  collapsed-box">
             <div class="box-header">
               <h3 class="box-title">User roles</h3>
               <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                <button type="button" class="btn btn-box-tool btn-collapse" data-widget="collapse" data-toggle="tooltip"
                         title="Collapse">
                   <i class="fa fa-plus"></i></button>
               </div>
@@ -84,11 +84,11 @@
                   <td>{{$data->permissions}}</td>
                   <td class="manage-btn">
                       @if($data->status == 1)
-                          <a href="{{url('role/hide/'.$data->id)}}" onclick="softDelete(event, this)" class="btn btn-warning"><i class="fa fa-eye fa-lg"></i></a>
+                          <a href="{{url('role/hide/'.$data->id)}}" onclick="softDelete(event, this)" class="btn btn-warning" data-toggle="tooltip" title="Hide role"><i class="fa fa-eye fa-lg"></i></a>
                       @else
-                          <a href="{{url('role/show/'.$data->id)}}" onclick="softDelete(event, this)" class="btn btn-warning"><i class="fa fa-eye-slash fa-lg"></i></a>
+                          <a href="{{url('role/show/'.$data->id)}}" onclick="softDelete(event, this)" class="btn btn-default" data-toggle="tooltip" title="Show role"><i class="fa fa-eye-slash fa-lg"></i></a>
                       @endif
-                      <a href="{{url('role/delete/'.$data->id)}}" onclick="event.preventDefault();confirmBox(this, 'delete');" class="btn btn-danger"><i class="fa fa-trash fa-lg"></i></a>
+                      <a href="{{url('role/delete/'.$data->id)}}" onclick="event.preventDefault();confirmBox(this, 'delete');" class="btn btn-danger" data-toggle="tooltip" title="Delete role"><i class="fa fa-trash fa-lg"></i></a>
                   </td>
                 </tr>
                 @endforeach
@@ -101,11 +101,11 @@
         
         
         
-        <div class="box box-primary  collapsed-box">
+        <div class="box box-default  collapsed-box">
             <div class="box-header">
               <h3 class="box-title">Subjects</h3>
               <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                <button type="button" class="btn btn-box-tool btn-collapse" data-widget="collapse" data-toggle="tooltip"
                         title="Collapse">
                   <i class="fa fa-plus"></i></button>
               </div>
@@ -173,11 +173,11 @@
                   <td>{{$data->course_fee}}</td>
                   <td class="manage-btn">
                       @if($data->status == 1)
-                          <a href="{{url('subject/hide/'.$data->id)}}" onclick="softDelete(event, this)" class="btn btn-warning"><i class="fa fa-eye fa-lg"></i></a>
+                          <a href="{{url('subject/hide/'.$data->subject_id)}}" onclick="softDelete(event, this)" class="btn btn-warning" data-toggle="tooltip" title="Hide subject"><i class="fa fa-eye fa-lg"></i></a>
                       @else
-                          <a href="{{url('subject/show/'.$data->id)}}" onclick="softDelete(event, this)" class="btn btn-warning"><i class="fa fa-eye-slash fa-lg"></i></a>
+                          <a href="{{url('subject/show/'.$data->subject_id)}}" onclick="softDelete(event, this)" class="btn btn-default" data-toggle="tooltip" title="Show subject"><i class="fa fa-eye-slash fa-lg"></i></a>
                       @endif
-                      <a href="{{url('subject/delete/'.$data->id)}}" onclick="event.preventDefault();confirmBox(this, 'delete');" class="btn btn-danger"><i class="fa fa-trash fa-lg"></i></a>
+                      <a href="{{url('subject/delete/'.$data->subject_id)}}" onclick="event.preventDefault();confirmBox(this, 'delete');" class="btn btn-danger" data-toggle="tooltip" title="Delete subject"><i class="fa fa-trash fa-lg"></i></a>
                   </td>
                 </tr>
                 @endforeach

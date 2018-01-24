@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration
             $table->text('paddress')->nullable();
             $table->string('image', 100)->nullable();
             $table->integer('salary_scale')->nullable();
-            $table->tinyInteger('role_id')->nullable();
+            $table->tinyInteger('role_id');
             $table->text('experience')->nullable();
             $table->string('gender', 20)->nullable();
             $table->string('nationality', 30)->nullable();

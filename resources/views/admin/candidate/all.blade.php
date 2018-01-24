@@ -1,5 +1,10 @@
 @extends('layouts.index')
 @section('all')
+<section class="content-header">
+  <h5>
+      {{ Breadcrumbs::render('candidates') }}
+  </h5>
+</section>
 <section class="content">
   <div class="box box-primary">
     <div class="box-header">
@@ -28,22 +33,22 @@
           <td>{{$data->institute}}</td>
           <td>{{$data->result}}</td>
           @if($data->marks != '')
-              <td>{{$data->marks}}<a href="{{route('addMarks', ['id' => $data->id])}}" class="btn-inner" data-toggle="modal" data-target="#add-marks" onclick="setAction(this);"><i class="fa fa-refresh"></i></a></td>
+              <td>{{$data->marks}}<a href="{{route('addMarks', ['id' => $data->id])}}" class="btn-inner" data-toggle="modal" data-target="#add-marks" onclick="setAction(this);" title="Edit marks"><i class="fa fa-refresh"></i></a></td>
           @else
-          <td><a href="{{route('addMarks', ['id' => $data->id])}}" class="btn-add" data-toggle="modal" data-target="#add-marks" onclick="setAction(this);"><i class="fa fa-plus-circle"></i></a></td>
+              <td><a href="#" data-link="{{route('addMarks', ['id' => $data->id])}}" class="btn-add" data-toggle="modal" data-target="#add-marks" onclick="setAction(this);" title="Add marks"><i class="fa fa-plus-circle"></i></a></td>
           @endif
           <td class="manage-btn">
               @if($data->marks >= 40)
-                <a href="{{url('candidate/select/'.$data->id)}}" class="btn btn-success"><i class="fa fa-check fa-lg"></i></a>
+                <a href="{{url('candidate/select/'.$data->id)}}" class="btn btn-success" data-toggle="tooltip" title="Select candidate"><i class="fa fa-check fa-lg"></i></a>
               @endif
-                <a href="{{url('candidate/omit/'.$data->id)}}" onclick="event.preventDefault();confirmBox(this, 'soft-delete');" class="btn btn-danger"><i class="fa fa-close fa-lg"></i></a>
+                <a href="{{url('candidates/reject/'.$data->id)}}" onclick="event.preventDefault();confirmBox(this, 'soft-delete');" class="btn btn-danger" data-toggle="tooltip" title="Reject candidate"><i class="fa fa-close fa-lg"></i></a>
           </td>
         </tr>
         @endforeach
       </table>
     </div>
-    
-        <div class="modal fade" id="add-marks">
+    <!-- /.box-body -->
+        <div class="modal fade{{$errors->all() ? ' in' : ''}}"  id="add-marks" style="{{$errors->all() ? 'display:block;' : 'display:none;'}}">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
@@ -51,12 +56,17 @@
                   <span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title">Add marks</h4>
               </div>
-                <form method="post" action="#" id="am-form">
+                <form method="post" action="#" id="modal-form">
                     {{csrf_field()}}
                     <div class="modal-body">
-                        <div class="form-group">
+                        <div class="form-group{{ $errors->has('marks') ? ' has-error' : '' }}">
                             <label for="marks">Marks</label>
                             <input type="text" id="marks" name="marks" class="form-control" placeholder="Enter marks">
+                            @if ($errors->has('marks'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('marks') }}</strong>
+                                </span>
+                            @endif
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -70,7 +80,6 @@
           <!-- /.modal-dialog -->
         </div>
         <!-- /.modal -->
-    <!-- /.box-body -->
   </div>
 </section>
 @endsection

@@ -29,6 +29,15 @@ class SalaryController extends Controller
     }
     
     public function ts_insert(Request $request) {
+        $validate = $request->validate([
+                    'payment_method' => 'required',
+                    'pamount_taka' => 'required',
+                    'pamount_words' => 'required',
+                    'payment_date' => 'required',
+                ], [
+                    'pamount_taka.reqiored' => 'Payment amount in taka is required.',
+                    'pamount_words.reqiored' => 'Payment amount in words is required.',
+                ]);
         $insert = TSalary::insertGetId([
              'user_id' => $request->user_id,
              'payment_method' => $request->payment_method,
@@ -63,6 +72,15 @@ class SalaryController extends Controller
     }
     
     public function es_insert(Request $request) {
+        $validate = $request->validate([
+                    'payment_method' => 'required',
+                    'pamount_taka' => 'required',
+                    'pamount_words' => 'required',
+                    'payment_date' => 'required',
+                ], [
+                    'pamount_taka.reqiored' => 'Payment amount in taka is required.',
+                    'pamount_words.reqiored' => 'Payment amount in words is required.',
+                ]);
         $insert = ESalary::insertGetId([
              'employee_id' => $request->employee_id,
              'payment_method' => $request->payment_method,

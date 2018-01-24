@@ -18,7 +18,7 @@ class SettingController extends Controller
                       ->get();
         
         $select_subject = DB::table('subjects')
-                          ->orderBy('id', 'DESC')
+                          ->orderBy('subject_id', 'DESC')
                           ->get();
         
         return view('admin.settings.all',
@@ -27,7 +27,7 @@ class SettingController extends Controller
     
     public function insert_role(Request $request) {
         $validate = $request->validate([
-            'id' => 'unique:roles,id|digits_between:1,4',
+            'id' => 'unique:roles,id',
             'role_name' => 'required',
         ]);
         $permissions = '';
@@ -110,4 +110,9 @@ class SettingController extends Controller
       }
     }
     
+    
+    public function clear_session() {
+        $errors = '';
+        return $errors;
+    }
 }

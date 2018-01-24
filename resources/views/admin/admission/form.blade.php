@@ -92,7 +92,7 @@
                     <div class="form-group{{ $errors->has('cfrom') ? ' has-error' : '' }}">
                         <div class="input-group">
                             <span class="input-group-addon bg-gray">From</span>
-                            <input type="text" class="form-control" id="cfrom" name="cfrom" placeholder="School/College/University" value="{{old('cform')}}">
+                            <input type="text" class="form-control" id="cfrom" name="cfrom" placeholder="School/College/University" value="{{old('cfrom')}}">
                         </div>
                         @if ($errors->has('cfrom'))
                             <span class="help-block">
@@ -123,7 +123,7 @@
                         @endif
                     </div>
                     <div class="form-group{{ $errors->has('caddress') ? ' has-error' : '' }}">
-                        <label for="caddress">Current address <span class="text-require">(require)</span></label>
+                        <label for="caddress">Current address</label>
                         <textarea class="form-control" id="caddress" name="caddress" rows="3" placeholder="Enter your current address">{{old('caddress')}}</textarea>
                         @if ($errors->has('caddress'))
                             <span class="help-block">
@@ -132,7 +132,7 @@
                         @endif
                     </div>
                     <div class="form-group{{ $errors->has('paddress') ? ' has-error' : '' }}">
-                        <label for="paddress">Permanent address <span class="text-require">(require)</span></label>
+                        <label for="paddress">Permanent address</label>
                         <textarea class="form-control" id="paddress" name="paddress" rows="3" placeholder="Enter your permanent address">{{old('paddress')}}</textarea>
                         @if ($errors->has('paddress'))
                             <span class="help-block">
@@ -170,7 +170,7 @@
                           <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                           </div>
-                          <input type="text" class="form-control  pull-right" id="bdate" name="bdate" value="{{old('bdate')}}">
+                          <input type="text" class="form-control  pull-right" id="bdate" name="bdate" value="{{old('bdate')}}" placeholder="01 January 2001">
                         </div>
                         <!-- /.input group -->
                         @if ($errors->has('bdate'))
@@ -265,7 +265,7 @@
                     
                     <div class="form-group{{ $errors->has('religion') ? ' has-error' : '' }}">
                         <label for="religion">Religion</label>
-                        <input type="text" class="form-control" id="religion" name="religion" value="{{old('religion')}}">
+                        <input type="text" class="form-control" id="religion" name="religion" value="{{old('religion')}}" placeholder="Religion">
                         @if ($errors->has('religion'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('religion') }}</strong>
@@ -275,7 +275,7 @@
 
                     <div class="form-group{{ $errors->has('nationality') ? ' has-error' : '' }}">
                         <label for="nationality">Nationality</label>
-                        <input type="text" class="form-control" id="nationality" name="nationality" value="{{old('nationality')}}">
+                        <input type="text" class="form-control" id="nationality" name="nationality" value="{{old('nationality')}}" placeholder="Nationality">
                         @if ($errors->has('nationality'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('nationality') }}</strong>
@@ -285,20 +285,35 @@
                     
                     <div class="row">
                     <div class="col-sm-6">
-                    <label for="file-1">Photo</label>
+                    <label for="file-1">Photo <span class="text-require">(require)</span></label>
                     <div class="form-group">
                         
                         <input type="file" name="image" id="file-1" class="inputfile inputfile-1" data-multiple-caption="{count} files selected" multiple />
                         <label for="file-1"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17"><path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"/></svg> <span>Upload &hellip;</span></label>
+						<div class="form-group{{ $errors->has('image') ? ' has-error' : '' }}">
+						@if ($errors->has('image'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('image') }}</strong>
+                            </span>
+                        @endif
+						</div>
                     </div>
                     </div>
                     
                     <div class="col-sm-6">
-                    <label for="file-2">Signature</label>
+                    <label for="file-2">Signature <span class="text-require">(require)</span></label>
                     <div class="form-group">
                         
                         <input type="file" name="signature" id="file-2" class="inputfile inputfile-1" data-multiple-caption="{count} files selected" multiple />
                         <label for="file-2"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17"><path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"/></svg> <span>Upload &hellip;</span></label>
+						
+						<div class="form-group{{ $errors->has('signature') ? ' has-error' : '' }}">
+						@if ($errors->has('signature'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('signature') }}</strong>
+                            </span>
+                        @endif
+						</div>
                     </div>
                     </div>
                     </div>

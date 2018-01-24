@@ -19,6 +19,7 @@
           <th>Name</th>
           <th>Phone</th>
           <th>Subject</th>
+          <th>Session fee</th>
           <th>Due</th>
           <th>Paid</th>
           <th>Manage</th>
@@ -31,12 +32,13 @@
           <td>{{$data->name}}</td>
           <td>{{$data->phone}}</td>
           <td>{{$data->subject_name}}</td>
+          <td>{{$data->course_fee}}</td>
           <td>{{''}}</td>
           <td>{{''}}</td>
           <td class="manage-btn">
-                  <a href="{{url('student/view/'.$data->id)}}" class="btn btn-success"><i class="fa fa-eye fa-lg"></i></a>
-                  <a href="{{url('student/edit/'.$data->id)}}" class="btn btn-warning"><i class="fa fa-pencil fa-lg"></i></a>
-                  <a href="{{url('teacher/soft-delete/'.$data->id)}}" onclick="event.preventDefault();confirmBox(this, 'soft-delete');" class="btn btn-danger"><i class="fa fa-trash fa-lg"></i></a>
+                  <a href="{{url('student/view/'.$data->id)}}" class="btn btn-success" data-toggle="tooltip" title="View student"><i class="fa fa-eye fa-lg"></i></a>
+                  <a href="{{url('student/edit/'.$data->id)}}" class="btn btn-warning" data-toggle="tooltip" title="Edit student"><i class="fa fa-pencil fa-lg"></i></a>
+                  <a href="{{url('teacher/soft-delete/'.$data->id)}}" onclick="event.preventDefault();confirmBox(this, 'soft-delete');" class="btn btn-danger" data-toggle="tooltip" title="Delete student"><i class="fa fa-trash fa-lg"></i></a>
           </td>
         </tr>
         @endforeach

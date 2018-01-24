@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use DB;
 use App\Student;
 use Image;
+use App\Http\Requests\UStudentRequest;
 
 class StudentController extends Controller
 {
@@ -39,7 +40,7 @@ class StudentController extends Controller
     public function index() {
         $select = DB::table('students')
                 ->leftJoin('subjects', 'students.subject', '=', 'subjects.subject_code')
-                ->select('students.*', 'subjects.subject_name')
+                ->select('students.*', 'subjects.subject_name', 'subjects.course_fee')
                 ->where('students.status', '=', 1)
                 ->get();
         
@@ -69,7 +70,7 @@ class StudentController extends Controller
                     'subject' => $request->subject,
                 ];
     }
-    public function update(Request $request)
+    public function update(UStudentRequest $request)
     {
         $id = $request->id;
         $update = Student::where('id', '=', $id)

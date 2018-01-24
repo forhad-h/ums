@@ -25,11 +25,11 @@ class CreateStudentsTable extends Migration
             $table->string('bdate', 50);
             $table->text('caddress');
             $table->text('paddress');
-            $table->string('nationality', 30);
-            $table->string('religion', 30);
-            $table->string('image', 100);
-            $table->string('simage', 100);
-            $table->string('session', 20);
+            $table->string('nationality', 30)->nullable();
+            $table->string('religion', 30)->nullable();
+            $table->string('image', 100)->nullable();
+            $table->string('simage', 100)->nullable();
+            $table->string('session_year', 20);
             $table->string('session_name', 20);
             $table->integer('subject');
             $table->string('adate', 50);

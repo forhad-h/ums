@@ -26,7 +26,7 @@
                         <div class="col-sm-6 custom-padding">
                             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                                 <label for="name">Name <span class="text-require">(require)</span></label>
-                                <input type="text" class="form-control" id="name" name="name" value="{{old('name')}}">
+                                <input type="text" class="form-control" id="name" name="name" value="{{old('name')}}" placeholder="Enter full name">
                                 @if ($errors->has('name'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('name') }}</strong>
@@ -37,7 +37,7 @@
                             <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                                 <label for="email">Email <span class="text-require">(require)</span></label>
                                 
-                                    <input type="email" class="form-control" id="email" name="email" value="{{old('email')}}">
+                                    <input type="email" class="form-control" id="email" name="email" value="{{old('email')}}" placeholder="Enter email address">
                                     @if ($errors->has('email'))
                                         <span class="help-block">
                                             <strong>{{ $errors->first('email') }}</strong>
@@ -47,7 +47,7 @@
                             
                             <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
                                 <label for="phone">Phone</label>
-                                    <input type="text" class="form-control" id="phone" name="phone" value="{{old('phone')}}">
+                                    <input type="text" class="form-control" id="phone" name="phone" value="{{old('phone')}}" placeholder="Enter phone number">
                                     @if ($errors->has('phone'))
                                         <span class="help-block">
                                             <strong>{{ $errors->first('phone') }}</strong>
@@ -57,7 +57,7 @@
                             
                             <div class="form-group{{ $errors->has('designation') ? ' has-error' : '' }}">
                                 <label for="designation">Designation</label>
-                                <input type="text" class="form-control" id="designation" name="designation" value="{{old('designation')}}">
+                                <input type="text" class="form-control" id="designation" name="designation" value="{{old('designation')}}" placeholder="Enter designation">
                                 @if ($errors->has('designation'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('designation') }}</strong>
@@ -66,7 +66,7 @@
                             </div>
                             <div class="form-group{{ $errors->has('salaray_scale') || $errors->has('salary_scale') ? ' has-error' : '' }}">
                                 <label for="salary_scale">Salary scale</label>
-                                <input type="text" class="form-control" id="salary_scale" name="salary_scale" value="{{old('salary_scale')}}">
+                                <input type="text" class="form-control" id="salary_scale" name="salary_scale" value="{{old('salary_scale')}}" placeholder="Enter salary scale">
                                 @if ($errors->has('salary_scale'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('salary_scale') }}</strong>
@@ -102,7 +102,7 @@
                                   <div class="input-group-addon">
                                     <i class="fa fa-calendar"></i>
                                   </div>
-                                  <input type="text" class="form-control  pull-right" id="joining_date" name="joining_date" value="{{old('joining_date')}}">
+                                  <input type="text" class="form-control  pull-right" id="joining_date" name="joining_date" value="{{old('joining_date')}}" placeholder="01 January 2001">
                                 </div>
                                 <!-- /.input group -->
                             </div>
@@ -127,7 +127,7 @@
                             
                             <div class="form-group{{ $errors->has('password') || $errors->has('cpassword') ? ' has-error' : '' }}">
                                 <label for="password">Password <span class="text-require">(require)</span></label>
-                                <input type="password" class="form-control" id="password" name="password" value="{{old('password')}}">
+                                <input type="password" class="form-control" id="password" name="password" value="{{old('password')}}" placeholder="Password">
                                 @if ($errors->has('password'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('password') }}</strong>
@@ -137,7 +137,7 @@
                             
                             <div class="form-group{{$errors->has('cpassword') ? ' has-warning' : ''}}">
                                 <label for="cpassword">Confirm password</label>
-                                <input type="password" class="form-control" id="cpassword" name="cpassword">
+                                <input type="password" class="form-control" id="cpassword" name="cpassword" placeholder="Retype password">
                                 
                                 @if ($errors->has('cpassword'))
                                     <span class="help-block">
@@ -187,12 +187,12 @@
           <td>{{$data->joining_date}}</td>
           <td class="manage-btn">
               @if(Request::is('teachers') && ($data->id == Auth::user()->id))
-                  <a href="{{url('view-profile/'.Auth::user()->id)}}" class="btn btn-success"><i class="fa fa-eye fa-lg"></i></a>
-                  <a href="{{url('edit-profile')}}" class="btn btn-warning"><i class="fa fa-pencil fa-lg"></i></a>
+                  <a href="{{url('view-profile/'.Auth::user()->id)}}" class="btn btn-success" data-toggle="tooltip" title="View profile"><i class="fa fa-eye fa-lg"></i></a>
+                  <a href="{{url('edit-profile')}}" class="btn btn-warning" data-toggle="tooltip" title="Edit profile"><i class="fa fa-pencil fa-lg"></i></a>
               @else
-                  <a href="{{url('teacher/view/'.$data->id)}}" class="btn btn-success"><i class="fa fa-eye fa-lg"></i></a>
-                  <a href="{{url('teacher/edit/'.$data->id)}}" class="btn btn-warning"><i class="fa fa-pencil fa-lg"></i></a>
-                  <a href="{{url('teacher/soft-delete/'.$data->id)}}" onclick="event.preventDefault();confirmBox(this, 'soft-delete');" class="btn btn-danger"><i class="fa fa-trash fa-lg"></i></a>
+                  <a href="{{url('teacher/view/'.$data->id)}}" class="btn btn-success"><i class="fa fa-eye fa-lg" data-toggle="tooltip" title="View teacher"></i></a>
+                  <a href="{{url('teacher/edit/'.$data->id)}}" class="btn btn-warning" data-toggle="tooltip" title="Edit teacher"><i class="fa fa-pencil fa-lg"></i></a>
+                  <a href="{{url('teacher/soft-delete/'.$data->id)}}" onclick="event.preventDefault();confirmBox(this, 'soft-delete');" class="btn btn-danger" data-toggle="tooltip" title="Delete teacher"><i class="fa fa-trash fa-lg"></i></a>
               @endif
           </td>
         </tr>

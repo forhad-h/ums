@@ -2,7 +2,7 @@
 @section('all')
 <section class="content-header">
   <h5>
-      {{ Breadcrumbs::render('students') }}
+      {{ Breadcrumbs::render('allOthers') }}
   </h5>
 </section>
 <section class="content">
@@ -84,8 +84,8 @@
                           </div>
 
                           <div class="form-group{{ $errors->has('pamount_taka') ? ' has-error' : '' }}">
-                              <label for="pamount_taka">Amount in Taka</label>
-                                  <input type="text" class="form-control" id="pamount_taka" name="pamount_taka" value="{{old('pamount_taka')}}">
+                              <label for="pamount_taka">Amount in Taka <span class="text-require">(require)</span></label>
+                                  <input type="text" class="form-control" id="pamount_taka" name="pamount_taka" value="{{old('pamount_taka')}}" placeholder="Amount in taka">
                                   @if ($errors->has('pamount_taka'))
                                       <span class="help-block">
                                           <strong>{{ $errors->first('pamount_taka') }}</strong>
@@ -94,8 +94,8 @@
                           </div>
 
                           <div class="form-group{{ $errors->has('pamount_words') ? ' has-error' : '' }}">
-                              <label for="pamount_words">Amount in words</label>
-                                  <input type="text" class="form-control" id="pamount_words" name="pamount_words" value="{{old('pamount_words')}}">
+                              <label for="pamount_words">Amount in words <span class="text-require">(require)</span></label>
+                                  <input type="text" class="form-control" id="pamount_words" name="pamount_words" value="{{old('pamount_words')}}" placeholder="Amount in words">
                                   @if ($errors->has('pamount_words'))
                                       <span class="help-block">
                                           <strong>{{ $errors->first('pamount_words') }}</strong>
@@ -103,16 +103,21 @@
                                   @endif
                           </div>
 
-                          <div class="form-group">
-                              <label for="payment_date">Payment date</label>
+                          <div class="form-group{{ $errors->has('payment_date') ? ' has-error' : '' }}">
+                              <label for="payment_date">Payment date <span class="text-require">(require)</span></label>
 
                               <div class="input-group date">
                                 <div class="input-group-addon">
                                   <i class="fa fa-calendar"></i>
                                 </div>
-                                <input type="text" class="form-control  pull-right" id="payment_date" name="payment_date" value="{{old('payment_date')}}">
+                                  <input type="text" class="form-control  pull-right" id="payment_date" name="payment_date" value="{{old('payment_date')}}" placeholder="01 January 2001">
                               </div>
                               <!-- /.input group -->
+                               @if ($errors->has('payment_date'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('payment_date') }}</strong>
+                                    </span>
+                               @endif
                           </div>
                       </div>
                   </div>
@@ -153,7 +158,7 @@
           <td>{{$data->pamount_words}}</td>
           <td>{{$data->payment_date}}</td>
           <td class="manage-btn">
-                  <a href="{{url('f-other/receipt/'.$data->payment_id)}}" class="btn btn-success"><i class="fa fa-eye fa-lg"></i> View</a>
+                  <a href="{{url('f-other/receipt/'.$data->payment_id)}}" class="btn btn-success" data-toggle="tooltip" title="View payment"><i class="fa fa-eye fa-lg"></i> View</a>
           </td>
         </tr>
         @endforeach

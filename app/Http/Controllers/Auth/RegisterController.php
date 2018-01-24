@@ -6,6 +6,7 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Role;
 
 class RegisterController extends Controller
 {
@@ -37,6 +38,7 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+        $this->middleware('FTRegister');
     }
 
     /**
@@ -62,9 +64,16 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        Role::insert([
+                'id' => 1,
+                'role_name' => 'superadmin',
+                'permissions' => 'all'
+            ]);
+        
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
+            'role_id' => 1,
             'password' => bcrypt($data['password']),
         ]);
     }

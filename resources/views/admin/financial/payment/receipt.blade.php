@@ -1,7 +1,9 @@
 @extends('layouts.index')
 @section('select')
 <section class="content-header">
-
+  <h5>
+      {{ Breadcrumbs::render('receiptPayment', $select) }}
+  </h5>
 </section>
 
 <section class="content">
@@ -20,22 +22,22 @@
                     <div class="col-sm-12">
                         <div class="pull-right date">
                             <strong>Date</strong>
-                            <p><span class="text-muted">&colon;</span>{{$select->paymentM->payment_date}}</p><br>
+                            <p><span class="text-muted">&colon;</span>{{$select->paymentM ? $select->paymentM->payment_date : ''}}</p><br>
                         </div>
                     </div>
                     <div class="col-sm-7">
                     
                         <strong>Payment type</strong>
-                        <p><span class="text-muted">&colon;</span>{{$select->paymentM->payment_type}}</p><br>
+                        <p><span class="text-muted">&colon;</span>{{$select->paymentM ?  $select->paymentM->payment_type : ''}}</p><br>
 
                         <strong>Payment method</strong>
-                        <p><span class="text-muted">&colon;</span>{{$select->paymentM->payment_method}}</p><br>
+                        <p><span class="text-muted">&colon;</span>{{$select->paymentM ?  $select->paymentM->payment_method : ''}}</p><br>
                     
                         <strong>Amount in taka</strong>
-                        <p><span class="text-muted">&colon;</span>{{$select->paymentM->pamount_taka}}</p><br>
+                        <p><span class="text-muted">&colon;</span>{{$select->paymentM ?  $select->paymentM->pamount_taka : ''}}</p><br>
 
                         <strong>Amount in words</strong>
-                        <p><span class="text-muted">&colon;</span>{{$select->paymentM->pamount_words}}</p><br>
+                        <p><span class="text-muted">&colon;</span>{{$select->paymentM ?  $select->paymentM->pamount_words : ''}}</p><br>
                     </div>
                     <div class="col-sm-5">
                         <strong class="small-strong">ID</strong>

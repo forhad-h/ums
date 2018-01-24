@@ -12,13 +12,13 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('welcome');
 });
 
 Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/welcome', 'WelcomeController@welcome')->name('welcome');
 //view route
 Route::get('/teachers', 'UserController@index')->name('allTeachers');
 Route::get('/teacher/add', 'UserController@add')->name('addTeacher');
@@ -36,9 +36,13 @@ Route::get('/employee/view/{id}', 'EmployeeController@view')->name('viewEmployee
 Route::get('/employee/edit/{id}', 'EmployeeController@edit')->name('editEmployee');
 
 Route::get('/admission/form', 'AdmissionController@admission_form')->name('admissionForm');
-Route::get('/admission/candidates', 'CandidateController@all')->name('allCandidates');
-Route::get('/admission/selected', 'CandidateController@selected')->name('selectedCandidates');
-Route::get('/admission/rejected', 'CandidateController@rejected')->name('rejectedCandidates');
+Route::get('/admissions', 'AdmissionController@index')->name('allAdmission')->middleware('auth');
+Route::get('/admission/view/{id}', 'AdmissionController@view')->name('viewAdmission')->middleware('auth');
+Route::get('/admission/edit/{id}', 'AdmissionController@edit')->name('editAdmission')->middleware('auth');
+
+Route::get('/candidates', 'CandidateController@all')->name('allCandidates');
+Route::get('/candidates/selected', 'CandidateController@selected')->name('selectedCandidates');
+Route::get('/candidates/rejected', 'CandidateController@rejected')->name('rejectedCandidates');
 Route::get('/candidate/select/{id}', 'CandidateController@select')->name('selectCandidate');
 
 Route::get('/payments', 'PaymentController@index')->name('allPayments');
@@ -68,10 +72,18 @@ Route::post('/teacher/update-profile', 'UserController@update_profile')->name('u
 Route::post('/student/update', 'StudentController@update')->name('updateStudent');
 
 Route::post('/employee/insert', 'EmployeeController@insert')->name('insertEmployee');
+Route::post('/employee/add-to-user', 'EmployeeController@add_tu')->name('addtU');
+Route::post('/employee/update-to-user', 'EmployeeController@update_tu')->name('updatetU');
 Route::post('/employee/update', 'EmployeeController@update')->name('updateEmployee');
 Route::get('/employee/soft-delete/{id}', 'EmployeeController@soft_delete')->name('softDeleteEmployee');
+Route::get('/employee/eu-delete/{email}', 'EmployeeController@eu_delete')->name('EUDelete');
 
-Route::post('/candidate/insert', 'AdmissionController@insert')->name('insertCandidate');
+Route::post('/admission/insert', 'AdmissionController@insert')->name('insertAdmission');
+Route::post('/admission/update', 'AdmissionController@update')->name('updateAdmission');
+Route::get('/admission/soft-delete/{id}', 'AdmissionController@soft_delete')->name('sdeleteAdmission');
+
+Route::post('/candidate/insert', 'AdmissionController@c_insert')->name('insertCandidate');
+
 Route::post('/candidate/add-marks', 'CandidateController@add_marks')->name('addMarks');
 Route::post('/candidate/add', 'CandidateController@add')->name('addStudent');
 Route::get('/candidate/reject/{id}', 'CandidateController@reject')->name('rejectCandidate');

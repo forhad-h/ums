@@ -29,7 +29,7 @@ class UpdateProfile extends FormRequest
             'name'         => 'required|string|min:3|max:50',
             'email'        => 'required|email|max:80|unique:users,email,'.$this->get('id'),
             'phone'        => 'nullable|min:5|max:30',
-            'nid'          => 'nullable|min:5|max:50',
+            'nid'          => 'nullable|min:5|max:50|unique:users,nid,'.$this->get('id'),
             'coursen'      => 'nullable|min:2|max:150',
             'cfrom'        => 'nullable|min:2|max:150',
             'cresult'      => 'nullable|min:2|max:20',

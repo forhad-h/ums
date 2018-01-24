@@ -11,24 +11,36 @@ $(document).ready(function(){
 	//Date picker
 	$('#joining_date').datepicker({
 	  autoclose: true,
-	  format: 'd MM yyyy'
+	  format: 'dd MM yyyy'
 	})
 	
 	$('#payment_date').datepicker({
 	  autoclose: true,
-	  format: 'd MM yyyy'
+	  format: 'dd MM yyyy'
 	})
 	
 	$('#bdate').datepicker({
 	  autoclose: true,
-	  format: 'd MM yyyy'
+	  format: 'dd MM yyyy'
 	})
 	
 	$('#adate').datepicker({
 	  autoclose: true,
-	  format: 'd MM yyyy'
+	  format: 'dd MM yyyy'
 	})
-
+	
+	$('#start_date').datepicker({
+	  autoclose: true,
+	  format: 'dd MM yyyy'
+	})
+	
+	$('#end_date').datepicker({
+	  autoclose: true,
+	  format: 'dd MM yyyy'
+	})
+    // tooltip
+	$('[data-toggle="tooltip"], [data-toggle="modal"]').tooltip();
+	
 	//iCheck for checkbox and radio inputs
 	$('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
 	  checkboxClass: 'icheckbox_minimal-blue',
@@ -45,15 +57,27 @@ $(document).ready(function(){
 		}
 	});
 	
-	$('#cb-for-hf, #cb-for-hf ins').on('click', function() {
-		var isChecked = ($('#cb-for-hf').children('div:first-child').attr('aria-checked')
-		                 == 'true');
-		if(!isChecked) {
-			$('#hidden-field').hide();
-		}else {
-			$('#hidden-field').show();
-		}
+	$("button[data-dismiss='modal']").on('click', function() {
+		$('.modal').slideUp();
+		$('.modal-backdrop').fadeOut(function(){
+			$(this).remove();
+		});
 	});
+	$('#modal-form').on('submit', function() {
+	    sessionStorage.setItem('url', $(this).attr('action'));
+	});
+
+	if(sessionStorage.getItem('url')) {
+	    $('#modal-form').attr('action', sessionStorage.getItem('url'));
+	}else {
+		$('#modal-form').attr('action', '#');
+	}
+	
+	sessionStorage.removeItem('url');
+	
+	// breadcrumbs icon
+	$('.breadcrumb-item:first-child').before('<i class="fa fa-home icon-breadcrumbs"></i>');
+	
 });
 
 function confirmBox(thisElm, dType) {
@@ -89,5 +113,5 @@ function softDelete(e, thisElm) {
 }
 
 function setAction(thisElm) {
-	$('#am-form').attr('action', $(thisElm).attr('href'));
+	$('#modal-form').attr('action', $(thisElm).attr('data-link'));
 }

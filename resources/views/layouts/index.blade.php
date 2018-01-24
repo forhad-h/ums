@@ -59,7 +59,7 @@
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>A</b>LT</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Admin</b>LTE</span>
+      <span class="logo-lg"><b>UMS</b></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -344,7 +344,7 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
-        <li class="{{Request::is('home') ? 'active' : ''}}"><a href="{{url('home')}}"><i class="fa fa-book"></i> <span>Dashboard</span></a></li>
+        <li class="{{Request::is('home') ? 'active' : ''}}"><a href="{{url('home')}}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
         <li class="{{Request::is('teachers') ||
         (Request::is('teacher/edit/*') &&
         Auth::id() != @$select->id) ||
@@ -352,50 +352,88 @@
         Auth::id() != @$select->id) ? 'active' : ''}}"><a href="{{url('teachers')}}"><i class="fa fa-user"></i> <span>Teachers</span></a></li>
 
         <li class="{{Request::is('students') ||
-        Request::is('student/edit/*') ? 'active' : ''}}"><a href="{{url('students')}}"><i class="fa fa-user"></i> <span>Students</span></a></li>
+        Request::is('student/edit/*') || Request::is('student/view/*') ? 'active' : ''}}"><a href="{{url('students')}}"><i class="fa fa-users"></i> <span>Students</span></a></li>
         
         <li class="{{Request::is('employees') ||
-        Request::is('employee/edit/*') ? 'active' : ''}}"><a href="{{url('employees')}}"><i class="fa fa-user"></i> <span>Employees</span></a></li>
+        Request::is('employee/edit/*') ||
+        Request::is('employee/view/*') ? 'active' : ''}}"><a href="{{url('employees')}}"><i class="fa fa-user-circle-o"></i> <span>Employees</span></a></li>
         
         <li class="treeview{{Request::is('admission/form') ||
-        Request::is('admission/candidate/*') ||
-        Request::is('candidate/view/*') ? ' active' : ''}}">
-            <a href="#"><i class="fa fa-user"></i> <span>Admission</span>
+        Request::is('admissions') ||
+        Request::is('admission/view/*') ||
+        Request::is('admission/edit/*') ? ' active' : ''}}">
+            <a href="#"><i class="fa fa-id-card-o"></i> <span>Admission</span>
                 <span class="pull-right-container">
                   <i class="fa fa-angle-left pull-right"></i>
                 </span>
             </a>
             <ul class="treeview-menu">
-                <li><a href="{{url('admission/candidates')}}"><i class="fa fa-circle-o"></i>Candidates</a></li>
-                <li><a href="{{url('admission/selected')}}"><i class="fa fa-circle-o"></i>Selected</a></li>
-                <li><a href="{{url('admission/rejected')}}"><i class="fa fa-circle-o"></i>Rejected</a></li>
-                <li><a href="{{url('admission/form')}}"><i class="fa fa-circle-o"></i>Form</a></li>
+                <li class="{{Request::is('admissions') ||
+                 Request::is('admission/view/*') ||
+                 Request::is('admission/edit/*') ? 'active' : ''}}"><a href="{{url('admissions')}}"><i class="fa fa-square-o"></i>Admissions</a></li>
+                <li class="{{Request::is('admission/form') ? 'active' : ''}}"><a href="{{url('admission/form')}}"><i class="fa fa-square-o"></i>Form</a></li>
             </ul>
         </li>
         
-        <li class="treeview">
-            <a href="#"><i class="fa fa-user"></i> <span>Financial</span>
+        <li class="treeview{{Request::is('candidates') ||
+        Request::is('candidates/selected') ||
+        Request::is('candidates/rejected') ||
+        Request::is('candidate/select/*') ? ' active' : ''}}">
+            <a href="#"><i class="fa fa-address-book-o"></i> <span>Candidates</span>
                 <span class="pull-right-container">
                   <i class="fa fa-angle-left pull-right"></i>
                 </span>
             </a>
             <ul class="treeview-menu">
-                <li><a href="{{url('payments')}}"><i class="fa fa-circle-o"></i>Students payment</a></li>
-                <li><a href="{{url('teachers-salary')}}"><i class="fa fa-circle-o"></i>Teachers salary</a></li>
-                <li><a href="{{url('employees-salary')}}"><i class="fa fa-circle-o"></i>Employees salary</a></li>
-                <li><a href="{{url('f-others')}}"><i class="fa fa-circle-o"></i>Others</a></li>
+                <li class="{{Request::is('candidates')||
+                 Request::is('candidate/select/*') ? 'active' : ''}}"><a href="{{url('candidates')}}"><i class="fa fa-square-o"></i>Candidates</a></li>
+                <li class="{{Request::is('candidates/selected') ? 'active' : ''}}"><a href="{{url('candidates/selected')}}"><i class="fa fa-square-o"></i>Selected</a></li>
+                <li class="{{Request::is('candidates/rejected') ? 'active' : ''}}"><a href="{{url('candidates/rejected')}}"><i class="fa fa-square-o"></i>Rejected</a></li>
+            </ul>
+        </li>
+        
+        <li class="treeview{{Request::is('payments') ||
+        Request::is('payment/add/*') ||
+        Request::is('payment/receipt/*') ||
+        Request::is('teachers-salary') ||
+        Request::is('teacher-salary/add/*') ||
+        Request::is('teacher-salary/receipt/*') ||
+        Request::is('employees-salary') ||
+        Request::is('employee-salary/add/*') ||
+        Request::is('employee-salary/receipt/*') ||
+        Request::is('f-others') ||
+        Request::is('f-other/add/*') ||
+        Request::is('f-other/receipt/*') ? ' active' : ''}}">
+            <a href="#"><i class="fa fa-credit-card"></i> <span>Financial</span>
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+                <li class="{{Request::is('payments') ||
+                  Request::is('payment/add/*') ||
+                  Request::is('payment/receipt/*') ? 'active' : ''}}"><a href="{{url('payments')}}"><i class="fa fa-square-o"></i>Students payment</a></li>
+                <li class="{{Request::is('teachers-salary') ||
+                 Request::is('teacher-salary/add/*') ||
+                 Request::is('teacher-salary/receipt/*') ? 'active' : ''}}"><a href="{{url('teachers-salary')}}"><i class="fa fa-square-o"></i>Teachers salary</a></li>
+                <li class="{{Request::is('employees-salary') ||
+                  Request::is('employee-salary/add/*') ||
+                  Request::is('employee-salary/receipt/*') ? 'active' : ''}}"><a href="{{url('employees-salary')}}"><i class="fa fa-square-o"></i>Employees salary</a></li>
+                <li class="{{Request::is('f-others') ||
+                 Request::is('f-other/add/*') ||
+                 Request::is('f-other/receipt/*') ? 'active' : ''}}"><a href="{{url('f-others')}}"><i class="fa fa-square-o"></i>Others</a></li>
             </ul>
         </li>
             
         <li class="{{Request::is('settings') ? 'active' : ''}}"><a href="{{url('settings')}}"><i class="fa fa-cogs"></i> <span>Settings</span></a></li>
         
         <li class="header">ACCOUNT</li>
-        <li class="{{(Request::is('teacher/view/*') && Auth::id() == @$select->id) || Request::is('edit-profile') ||  Request::is('view-profile/*')? 'active' : ''}}"><a href="{{url('view-profile/'.Auth::id())}}"><i class="fa fa-circle-o text-yellow"></i> <span>Profile</span></a></li>
+        <li class="{{(Request::is('teacher/view/*') && Auth::id() == @$select->id) || Request::is('edit-profile') ||  Request::is('view-profile/*')? 'active' : ''}}"><a href="{{url('view-profile/'.Auth::id())}}"><i class="fa fa-address-book text-aqua"></i> <span>Profile</span></a></li>
         <li>
             <a href="{{ route('logout') }}"
                 onclick="event.preventDefault();
                          document.getElementById('logout-form').submit();">
-                <i class="fa fa-circle-o text-aqua"></i> <span>Logout</span>
+                <i class="fa fa-sign-out text-orange"></i> <span>Logout</span>
             </a>
 
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

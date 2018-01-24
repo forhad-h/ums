@@ -2,7 +2,7 @@
 @section('admission-form')
 <section class="content-header">
   <h5>
-      {{ Breadcrumbs::render('admissionForm') }}
+      {{ Breadcrumbs::render('editStudent', $select) }}
   </h5>
 </section>
 <section class="content">
@@ -32,7 +32,7 @@
 
                     <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
                         <label for="phone">Phone</label>
-                        <input type="text" class="form-control" id="phone" name="phone" value="{{$select->phone}}" placeholder="Enter your phone number">
+                        <input type="text" class="form-control" id="phone" name="phone" value="{{$select->phone}}" placeholder="Enter phone number">
                         @if ($errors->has('phone'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('phone') }}</strong>
@@ -52,7 +52,7 @@
                     
                     <div class="form-group{{ $errors->has('nid') ? ' has-error' : '' }}">
                         <label for="nid">NID No.</label>
-                        <input type="text" class="form-control" id="nid" name="nid" value="{{$select->nid}}" placeholder="Enter your NID number">
+                        <input type="text" class="form-control" id="nid" name="nid" value="{{$select->nid}}" placeholder="Enter NID number">
                         @if ($errors->has('nid'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('nid') }}</strong>
@@ -62,7 +62,7 @@
                     
                     <div class="form-group{{ $errors->has('caddress') ? ' has-error' : '' }}">
                         <label for="caddress">Current address <span class="text-require">(require)</span></label>
-                        <textarea class="form-control" id="caddress" name="caddress" rows="3" placeholder="Enter your current address">{{$select->caddress}}</textarea>
+                        <textarea class="form-control" id="caddress" name="caddress" rows="3" placeholder="Enter current address">{{$select->caddress}}</textarea>
                         @if ($errors->has('caddress'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('caddress') }}</strong>
@@ -72,7 +72,7 @@
                     
                     <div class="form-group{{ $errors->has('religion') ? ' has-error' : '' }}">
                         <label for="religion">Religion</label>
-                        <input type="text" class="form-control" id="religion" name="religion" value="{{$select->religion}}">
+                        <input type="text" class="form-control" id="religion" name="religion" value="{{$select->religion}}" placeholder="Religion">
                         @if ($errors->has('religion'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('religion') }}</strong>
@@ -82,7 +82,7 @@
 
                     <div class="form-group{{ $errors->has('nationality') ? ' has-error' : '' }}">
                         <label for="nationality">Nationality</label>
-                        <input type="text" class="form-control" id="nationality" name="nationality" value="{{$select->nationality}}">
+                        <input type="text" class="form-control" id="nationality" name="nationality" value="{{$select->nationality}}" placeholder="nationality">
                         @if ($errors->has('nationality'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('nationality') }}</strong>
@@ -117,7 +117,7 @@
                           <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                           </div>
-                          <input type="text" class="form-control  pull-right" id="bdate" name="bdate"  value="{{$select->bdate}}">
+                          <input type="text" class="form-control  pull-right" id="bdate" name="bdate"  value="{{$select->bdate}}" placeholder="01 January 2001">
                         </div>
                         <!-- /.input group -->
                         @if ($errors->has('bdate'))
@@ -147,7 +147,7 @@
                     
                     <div class="form-group{{ $errors->has('paddress') ? ' has-error' : '' }}">
                         <label for="paddress">Permanent address <span class="text-require">(require)</span></label>
-                        <textarea class="form-control" id="paddress" name="paddress" rows="3" placeholder="Enter your permanent address">{{$select->paddress}}</textarea>
+                        <textarea class="form-control" id="paddress" name="paddress" rows="3" placeholder="Enter permanent address">{{$select->paddress}}</textarea>
                         @if ($errors->has('paddress'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('paddress') }}</strong>
@@ -157,7 +157,7 @@
                     <label>Subject <span class="text-require">(require)</span></label>
                     <div class="form-group{{ $errors->has('subject') ? ' has-error' : '' }}">
                             <select name="subject" id="subject" class="form-control select2" style="width: 100%;">
-                                <option value="">Select subject</option>
+                                <option value="">Select subject <span class="text-require">(require)</span></option>
                                 @foreach($select_subject as $data)
                                     @if($select->subject == $data->subject_code)
                                         <option value="{{$data->subject_code}}" selected>{{$data->subject_name}}</option>
@@ -167,9 +167,9 @@
                                 @endforeach
                             </select>
                             
-                        @if ($errors->has('subject_first'))
+                        @if ($errors->has('subject'))
                             <span class="help-block">
-                                <strong>{{ $errors->first('subject_first') }}</strong>
+                                <strong>{{ $errors->first('subject') }}</strong>
                             </span>
                         @endif
                     </div>

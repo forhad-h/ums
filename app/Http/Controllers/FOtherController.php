@@ -25,6 +25,18 @@ class FOtherController extends Controller
     }
     
     public function insert(Request $request) {
+        $validate = $request->validate([
+                    'payment_type' => 'required',
+                    'payment_des' => 'required',
+                    'payment_method' => 'required',
+                    'pamount_taka' => 'required',
+                    'pamount_words' => 'required',
+                    'payment_date' => 'required',
+                ], [
+                    'pamount_taka.required' => 'Payment amount in taka is required.',
+                    'pamount_words.required' => 'Payment amount in words is required.',
+                    'payment_des.required' => 'Payment description is required.',
+                ]);
         $insert = FOther::insertGetId([
              'payment_type' => $request->payment_type,
              'payment_des' => $request->payment_des,

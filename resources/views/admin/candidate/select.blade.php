@@ -1,7 +1,9 @@
 @extends('layouts.index')
 @section('select')
 <section class="content-header">
-
+  <h5>
+      {{ Breadcrumbs::render('sCandidate', $select) }}
+  </h5>
 </section>
 
 <section class="content">
@@ -18,12 +20,12 @@
                   <form enctype="multipart/form-data" action="{{route('addStudent', ['id' => $select->id])}}" method="post">
                       {{csrf_field()}}
                     <div class="box-body">
-                      <div class="form-group{{ $errors->has('session') ? ' has-error' : '' }}">
-                        <label for="session">Session <span class="text-require">(require)</span></label>
-                        <input type="text" class="form-control" id="session" name="session" value="{{old('session')}}" placeholder="2017-2018">
-                        @if ($errors->has('session'))
+                      <div class="form-group{{ $errors->has('session_year') ? ' has-error' : '' }}">
+                        <label for="session_year">Session year<span class="text-require">(require)</span></label>
+                        <input type="text" class="form-control" id="session_year" name="session_year" value="{{old('session_year')}}" placeholder="2017-2018">
+                        @if ($errors->has('session_year'))
                             <span class="help-block">
-                                <strong>{{ $errors->first('session') }}</strong>
+                                <strong>{{ $errors->first('session_year') }}</strong>
                             </span>
                         @endif
                       </div>
@@ -52,9 +54,9 @@
                             @endif
                             
                         </select>
-                        @if ($errors->has('session'))
+                        @if ($errors->has('session_name'))
                             <span class="help-block">
-                                <strong>{{ $errors->first('session') }}</strong>
+                                <strong>{{ $errors->first('session_name') }}</strong>
                             </span>
                         @endif
                       </div>

@@ -2,7 +2,7 @@
 @section('all')
 <section class="content-header">
   <h5>
-      {{ Breadcrumbs::render('students') }}
+      {{ Breadcrumbs::render('allTSalary') }}
   </h5>
 </section>
 <section class="content">
@@ -34,8 +34,8 @@
           <td>{{''}}</td>
           <td>{{''}}</td>
           <td class="manage-btn">
-                  <a href="{{url('teacher-salary/add/'.$data->id)}}" target="_blank" class="btn btn-warning"><i class="fa fa-dollar fa-lg"></i> Pay</a>
-                  <a href="{{url('teacher-salary/receipt/'.$data->id)}}" target="_blank" class="btn btn-success"><i class="fa fa-eye fa-lg"></i></a>
+                  <a href="{{url('teacher-salary/add/'.$data->id)}}" target="_blank" class="btn btn-primary"><i class="fa fa-dollar fa-lg"></i> Pay</a>
+                  <a href="{{url('teacher-salary/receipt/'.$data->id)}}" class="btn btn-success" data-toggle="tooltip" title="View payment"><i class="fa fa-eye fa-lg"></i></a>
           </td>
         </tr>
         @endforeach

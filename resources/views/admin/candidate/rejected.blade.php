@@ -1,5 +1,10 @@
 @extends('layouts.index')
 @section('all')
+<section class="content-header">
+  <h5>
+      {{ Breadcrumbs::render('rCandidates') }}
+  </h5>
+</section>
 <section class="content">
   <div class="box box-primary">
     <div class="box-header">

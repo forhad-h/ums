@@ -1,7 +1,9 @@
 @extends('layouts.index')
 @section('select')
 <section class="content-header">
-
+  <h5>
+    {{ Breadcrumbs::render('viewStudent', $select) }}
+  </h5>
 </section>
 
 <section class="content">
