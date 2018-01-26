@@ -3,3 +3,5 @@
 * Hide/show role button
 * order by do not work with data-table
 * make data-date for date picker
+* admission form appear with sidebar menu
+* alert shows after <-back

@@ -12,7 +12,7 @@
     </div>
     <!-- /.box-header -->
     <div class="box-body">
-      <table id="allTeacher" class="table table-bordered table-striped">
+      <table data-table="true" class="table table-bordered table-striped">
         <thead>
         <tr>
           <th>ID</th>
@@ -38,7 +38,7 @@
           <td class="manage-btn">
                   <a href="{{url('student/view/'.$data->id)}}" class="btn btn-success" data-toggle="tooltip" title="View student"><i class="fa fa-eye fa-lg"></i></a>
                   <a href="{{url('student/edit/'.$data->id)}}" class="btn btn-warning" data-toggle="tooltip" title="Edit student"><i class="fa fa-pencil fa-lg"></i></a>
-                  <a href="{{url('teacher/soft-delete/'.$data->id)}}" onclick="event.preventDefault();confirmBox(this, 'soft-delete');" class="btn btn-danger" data-toggle="tooltip" title="Delete student"><i class="fa fa-trash fa-lg"></i></a>
+                  <a href="{{url('student/soft-delete/'.$data->id)}}" onclick="event.preventDefault();confirmBox(this, 'soft-delete');" class="btn btn-danger" data-toggle="tooltip" title="Delete student"><i class="fa fa-trash fa-lg"></i></a>
           </td>
         </tr>
         @endforeach

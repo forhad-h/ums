@@ -45,9 +45,9 @@ Route::get('/candidates/selected', 'CandidateController@selected')->name('select
 Route::get('/candidates/rejected', 'CandidateController@rejected')->name('rejectedCandidates');
 Route::get('/candidate/select/{id}', 'CandidateController@select')->name('selectCandidate');
 
-Route::get('/payments', 'PaymentController@index')->name('allPayments');
-Route::get('/payment/add/{id}', 'PaymentController@add')->name('addPayment');
-Route::get('/payment/receipt/{id}', 'PaymentController@receipt')->name('receiptPayment');
+Route::get('/students-payment', 'PaymentController@index')->name('allPayments');
+Route::get('/student-payment/add/{id}', 'PaymentController@add')->name('addPayment');
+Route::get('/student-payment/receipt/{sid}/{pid}', 'PaymentController@receipt')->name('receiptPayment');
 
 Route::get('/teachers-salary', 'SalaryController@teachers_index')->name('allTSalary');
 Route::get('/teacher-salary/add/{id}', 'SalaryController@ts_add')->name('addTSalary');
@@ -67,9 +67,14 @@ Route::get('/settings', 'SettingController@index')->name('personalSettings');
 Route::post('/teacher/insert', 'UserController@insert')->name('insertTeacher');
 Route::post('/teacher/update', 'UserController@update')->name('updateTeacher');
 Route::get('/teacher/soft-delete/{id}', 'UserController@soft_delete')->name('softDeleteTeacher');
+Route::get('/teacher/delete/{id}', 'UserController@delete')->name('deleteTeacher');
+Route::get('/teacher/restore/{id}', 'UserController@restore')->name('restoreTeacher');
 Route::post('/teacher/update-profile', 'UserController@update_profile')->name('updateProfile');
 
 Route::post('/student/update', 'StudentController@update')->name('updateStudent');
+Route::get('/student/soft-delete/{id}', 'StudentController@soft_delete')->name('softDeleteStudent');
+Route::get('/student/delete/{id}', 'StudentController@delete')->name('deleteStudent');
+Route::get('/student/restore/{id}', 'StudentController@restore')->name('restoreStudent');
 
 Route::post('/employee/insert', 'EmployeeController@insert')->name('insertEmployee');
 Route::post('/employee/add-to-user', 'EmployeeController@add_tu')->name('addtU');
@@ -88,7 +93,7 @@ Route::post('/candidate/add-marks', 'CandidateController@add_marks')->name('addM
 Route::post('/candidate/add', 'CandidateController@add')->name('addStudent');
 Route::get('/candidate/reject/{id}', 'CandidateController@reject')->name('rejectCandidate');
 
-Route::post('/payment/insert', 'PaymentController@insert')->name('insertPayment');
+Route::post('/student-payment/insert', 'PaymentController@insert')->name('insertPayment');
 
 Route::post('/teacher-salary/insert', 'SalaryController@ts_insert')->name('insertTSalary');
 
@@ -106,3 +111,6 @@ Route::post('/subject/insert', 'SettingController@insert_subject')->name('insert
 Route::get('/subject/hide/{id}', 'SettingController@hide_subject')->name('hideSubject');
 Route::get('/subject/show/{id}', 'SettingController@show_subject')->name('showSubject');
 Route::get('/subject/delete/{id}', 'SettingController@delete_subject')->name('deleteSubject');
+
+
+Route::get('/all-trash', 'TrashController@all_trash')->name('allTrash');

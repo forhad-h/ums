@@ -201,4 +201,22 @@ class UserController extends Controller
             return redirect('teachers')->with('success-delete', 'successful');
         }
     }
+    
+    public function restore($id) {
+        $restore = User::where('id', '=', $id)
+                    ->update([
+                        'status' => 1,
+                    ]);
+        if($restore) {
+            return redirect('all-trash')->with('success-restore', 'succesful');
+        }
+    }
+    
+    public function delete($id) {
+        $delete = User::where('id', '=', $id)
+                  ->delete();
+        if($delete) {
+            return redirect('all-trash')->with('success-pdelete', 'succesful');
+        }
+    }
 }

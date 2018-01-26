@@ -1,7 +1,6 @@
 $(document).ready(function(){
 	//data table
-	$('#allTeacher').DataTable();
-	$('#allEmployees').DataTable();
+	$('[data-table="true"]').DataTable();
 	
 	//Initialize Select2 Elements
 	$('.select2').select2({
@@ -57,12 +56,6 @@ $(document).ready(function(){
 		}
 	});
 	
-	$("button[data-dismiss='modal']").on('click', function() {
-		$('.modal').slideUp();
-		$('.modal-backdrop').fadeOut(function(){
-			$(this).remove();
-		});
-	});
 	$('#modal-form').on('submit', function() {
 	    sessionStorage.setItem('url', $(this).attr('action'));
 	});
@@ -78,6 +71,7 @@ $(document).ready(function(){
 	// breadcrumbs icon
 	$('.breadcrumb-item:first-child').before('<i class="fa fa-home icon-breadcrumbs"></i>');
 	
+	$("[role='alert']").delay(2000).fadeOut(500);
 });
 
 function confirmBox(thisElm, dType) {

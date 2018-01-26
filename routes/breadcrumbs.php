@@ -38,9 +38,14 @@ Breadcrumbs::register('viewProfile', function($breadcrumbs, $teacher) {
 });
 
 //admission
-Breadcrumbs::register('admissions', function($breadcrumbs) {
+Breadcrumbs::register('admission', function($breadcrumbs) {
     $breadcrumbs->parent('home');
     $breadcrumbs->push('Admissions', route('allAdmission'));
+});
+
+Breadcrumbs::register('admissions', function($breadcrumbs) {
+    $breadcrumbs->parent('admission');
+    $breadcrumbs->push('All admission', route('allAdmission'));
 });
 
 Breadcrumbs::register('editAdmission', function ($breadcrumbs, $admission) {
@@ -63,6 +68,11 @@ Breadcrumbs::register('admissionForm', function ($breadcrumbs) {
 Breadcrumbs::register('candidates', function ($breadcrumbs) {
     $breadcrumbs->parent('home');
     $breadcrumbs->push('Candidates', route('allCandidates'));
+});
+
+Breadcrumbs::register('allCandidates', function ($breadcrumbs) {
+    $breadcrumbs->parent('candidates');
+    $breadcrumbs->push('All candidates', route('allCandidates'));
 });
 
 Breadcrumbs::register('sCandidates', function ($breadcrumbs) {
@@ -140,9 +150,9 @@ Breadcrumbs::register('addPayment', function($breadcrumbs, $payment) {
     $breadcrumbs->push('Pay', route('viewEmployee', $payment->id));
 });
 
-Breadcrumbs::register('receiptPayment', function($breadcrumbs, $payment) {
+Breadcrumbs::register('receiptPayment', function($breadcrumbs, $student, $payment) {
     $breadcrumbs->parent('allPayments');
-    $breadcrumbs->push('Receipt', route('receiptPayment', $payment->id));
+    $breadcrumbs->push('Receipt', route('receiptPayment', [$student->id, $payment->payment_id]));
 });
 
 //Teachers salary
@@ -186,4 +196,10 @@ Breadcrumbs::register('allOthers', function($breadcrumbs) {
 Breadcrumbs::register('receiptOther', function($breadcrumbs, $oPayment) {
     $breadcrumbs->parent('allOthers');
     $breadcrumbs->push('Receipt', route('receiptOther', $oPayment->id));
+});
+
+//Trash
+Breadcrumbs::register('allTrash', function($breadcrumbs) {
+    $breadcrumbs->parent('home');
+    $breadcrumbs->push('All trash', route('allTrash'));
 });

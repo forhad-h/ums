@@ -330,17 +330,6 @@
           <p>Alexander Pierce</p>
         </div>
       </div>
-      <!-- search form -->
-      <form action="#" method="get" class="sidebar-form">
-        <div class="input-group">
-          <input type="text" name="q" class="form-control" placeholder="Search...">
-          <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                </button>
-              </span>
-        </div>
-      </form>
-      <!-- /.search form -->
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
@@ -362,7 +351,7 @@
         Request::is('admissions') ||
         Request::is('admission/view/*') ||
         Request::is('admission/edit/*') ? ' active' : ''}}">
-            <a href="#"><i class="fa fa-id-card-o"></i> <span>Admission</span>
+            <a href="#"><i class="fa fa-id-card-o"></i> <span>Admissions</span>
                 <span class="pull-right-container">
                   <i class="fa fa-angle-left pull-right"></i>
                 </span>
@@ -370,7 +359,7 @@
             <ul class="treeview-menu">
                 <li class="{{Request::is('admissions') ||
                  Request::is('admission/view/*') ||
-                 Request::is('admission/edit/*') ? 'active' : ''}}"><a href="{{url('admissions')}}"><i class="fa fa-square-o"></i>Admissions</a></li>
+                 Request::is('admission/edit/*') ? 'active' : ''}}"><a href="{{url('admissions')}}"><i class="fa fa-square-o"></i>All Admission</a></li>
                 <li class="{{Request::is('admission/form') ? 'active' : ''}}"><a href="{{url('admission/form')}}"><i class="fa fa-square-o"></i>Form</a></li>
             </ul>
         </li>
@@ -386,15 +375,15 @@
             </a>
             <ul class="treeview-menu">
                 <li class="{{Request::is('candidates')||
-                 Request::is('candidate/select/*') ? 'active' : ''}}"><a href="{{url('candidates')}}"><i class="fa fa-square-o"></i>Candidates</a></li>
+                 Request::is('candidate/select/*') ? 'active' : ''}}"><a href="{{url('candidates')}}"><i class="fa fa-square-o"></i>All candidates</a></li>
                 <li class="{{Request::is('candidates/selected') ? 'active' : ''}}"><a href="{{url('candidates/selected')}}"><i class="fa fa-square-o"></i>Selected</a></li>
                 <li class="{{Request::is('candidates/rejected') ? 'active' : ''}}"><a href="{{url('candidates/rejected')}}"><i class="fa fa-square-o"></i>Rejected</a></li>
             </ul>
         </li>
         
-        <li class="treeview{{Request::is('payments') ||
-        Request::is('payment/add/*') ||
-        Request::is('payment/receipt/*') ||
+        <li class="treeview{{Request::is('students-payment') ||
+        Request::is('student-payment/add/*') ||
+        Request::is('student-payment/receipt/*') ||
         Request::is('teachers-salary') ||
         Request::is('teacher-salary/add/*') ||
         Request::is('teacher-salary/receipt/*') ||
@@ -410,9 +399,9 @@
                 </span>
             </a>
             <ul class="treeview-menu">
-                <li class="{{Request::is('payments') ||
-                  Request::is('payment/add/*') ||
-                  Request::is('payment/receipt/*') ? 'active' : ''}}"><a href="{{url('payments')}}"><i class="fa fa-square-o"></i>Students payment</a></li>
+                <li class="{{Request::is('students-payment') ||
+                  Request::is('student-payment/add/*') ||
+                  Request::is('student-payment/receipt/*') ? 'active' : ''}}"><a href="{{url('students-payment')}}"><i class="fa fa-square-o"></i>Students payment</a></li>
                 <li class="{{Request::is('teachers-salary') ||
                  Request::is('teacher-salary/add/*') ||
                  Request::is('teacher-salary/receipt/*') ? 'active' : ''}}"><a href="{{url('teachers-salary')}}"><i class="fa fa-square-o"></i>Teachers salary</a></li>
@@ -426,6 +415,18 @@
         </li>
             
         <li class="{{Request::is('settings') ? 'active' : ''}}"><a href="{{url('settings')}}"><i class="fa fa-cogs"></i> <span>Settings</span></a></li>
+        
+        <li class="{{Request::is('all-trash') ? 'active' : ''}}"><a href="{{url('all-trash')}}"><i class="fa fa-trash-o"></i> <span>Trash</span>
+              <span class="pull-right-container">
+                <small class="label pull-right bg-red">
+                    {{
+                    
+                        App\User::where('status', '=', 0)->count() +
+                        App\Student::where('status', '=', 0)->count()
+                    
+                    }}
+                </small>
+              </span></a></li>
         
         <li class="header">ACCOUNT</li>
         <li class="{{(Request::is('teacher/view/*') && Auth::id() == @$select->id) || Request::is('edit-profile') ||  Request::is('view-profile/*')? 'active' : ''}}"><a href="{{url('view-profile/'.Auth::id())}}"><i class="fa fa-address-book text-aqua"></i> <span>Profile</span></a></li>
@@ -459,6 +460,8 @@
          @yield('add')
          
          @yield('select')
+         
+         @yield('content')
          
          
     <!-- /.content -->
@@ -652,7 +655,9 @@
           <div class="form-group">
             <label class="control-sidebar-subheading">
               Delete chat history
-              <a href="javascript:void(0)" class="text-red pull-right"><i class="fa fa-trash-o"></i></a>
+              <a href="javascript:void(0)" class="text-red pull-right"><i class="fa fa-trash-o"></i>
+              </a>
+              
             </label>
           </div>
           <!-- /.form-group -->
@@ -713,20 +718,28 @@
 <!-- SweetAlert -->
 <script src="{{asset('asset')}}/bower_components/bootstrap-sweetalert/dist/sweetalert.min.js"></script>
 @if(session('success-add'))
-    <script>
-        swal("Success", "Data has been added", "success");
-    </script>
+    <div class="success-alert-msg" role="alert"><strong>Successful! </strong>Data has been added.</div>
+@elseif(session('success-restore'))
+   <div class="success-alert-msg" role="alert"><strong>Successful! </strong>Data has been restored.</div>
 @elseif(session('success-update'))
-    <script>
-        swal("Success", "Record has been updated", "success");
-    </script>
+    <div class="success-alert-msg" role="alert"><strong>Successful! </strong>Record has been updated</div>
 @elseif(session('nu-error'))
-    <script>
-        swal("", "Nothing to update", "warning");
-    </script>
+    <div class="error-alert-msg" role="alert"><strong>Error! </strong>Nothing to update</div>
+@elseif(session('success-pdelete'))
+    <div class="error-alert-msg" role="alert">One record has been permanently deleted.</div>
 @elseif(session('success-delete'))
+    <div class="error-alert-msg" role="alert">One record has been cast to trash.</div>
+@endif
+@php
+    $errors2 = '';
+    if($errors->has('role') || 
+        $errors->has('password') || 
+        $errors->has('cpassword')) $errors2 = true;
+    else $errors1 = false;
+@endphp
+@if($errors2)
     <script>
-        swal("Success", "One record has been deleted.", "success");
+        $('#add-to-user').modal('show');
     </script>
 @endif
 <script src="{{asset('asset')}}/dist/js/custom.js"></script>

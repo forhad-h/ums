@@ -12,7 +12,7 @@
     </div>
     <!-- /.box-header -->
     <div class="box-body">
-      <table id="allTeacher" class="table table-bordered table-striped">
+      <table data-table="true" class="table table-bordered table-striped">
         <thead>
         <tr>
           <th>ID</th>
@@ -25,7 +25,16 @@
         </tr>
         </thead>
         <tbody>
-        @foreach($select as $data)
+        @foreach($select_students as $data)
+            @php
+                $payment_id = '';
+                foreach($select_payments as $datap) {
+                   if($data->id == $datap->student_id) {
+                     $payment_id = $datap->payment_id; 
+                     break;
+                    }
+                }
+            @endphp
         <tr>
           <td>{{$data->id}}</td>
           <td>{{$data->name}}</td>
@@ -34,8 +43,8 @@
           <td>{{$data->course_fee}}</td>
           <td>{{$data->course_fee}}</td>
           <td class="manage-btn">
-                  <a href="{{url('payment/add/'.$data->id)}}" target="_blank" class="btn btn-primary"><i class="fa fa-dollar fa-lg"></i> Pay</a>
-                  <a href="{{url('payment/receipt/'.$data->id)}}" class="btn btn-success" data-toggle="tooltip" title="View payment"><i class="fa fa-eye fa-lg"></i></a>
+                  <a href="{{url('student-payment/add/'.$data->id)}}" target="_blank" class="btn btn-primary"><i class="fa fa-dollar fa-lg"></i> Pay</a>
+                  <a href="{{url('student-payment/receipt/'.$data->id.'/'.$payment_id)}}" class="btn btn-success" data-toggle="tooltip" title="View payment"><i class="fa fa-eye fa-lg"></i></a>
           </td>
         </tr>
         @endforeach

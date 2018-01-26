@@ -13,18 +13,22 @@ class PaymentController extends Controller
         $this->middleware('auth');
     }
     public function index() {
-        $select = DB::table('students')
+        $select_students = DB::table('students')
                 ->leftJoin('subjects', 'students.subject', '=', 'subjects.subject_code')
                 ->select('students.*', 'subjects.*')
                 ->where('students.status', '=', 1)
                 ->get();
         
-        return view('admin.financial.payment.all', compact('select'));
+        $select_payments = DB::table('payments')
+                           ->orderBy('payment_id', 'DESC')
+                           ->get();
+        
+    return view('admin.financial.students_payment.all', compact(['select_students', 'select_payments']));
     }
     
     public function add($id) {
         $select = Student::findOrFail($id);
-        return view('admin.financial.payment.add', compact('select'));
+        return view('admin.financial.students_payment.add', compact('select'));
     }
     
     public function insert(Request $request) {
@@ -48,12 +52,21 @@ class PaymentController extends Controller
         ]);
         
         if($insert > 0) {
-            return redirect('payment/receipt/'.$request->student_id);
+            return redirect('student-payment/receipt/'.$request->student_id.'/'.$insert);
         }
     }
     
-    public function receipt($id) {
-        $select = Student::findOrFail($id);
-        return view('admin.financial.payment.receipt', compact('select'));
+    public function receipt($sid, $pid) {
+        $select_student = Student::findOrFail($sid);
+        
+        $select_last_payment = Payment::where('student_id', '=', $sid)
+                               ->where('payment_id', '=', $pid)
+                               ->orderBy('payment_id', 'DESC')
+                               ->first();
+        
+        $select_payment = Payment::where('student_id', '=', $sid)->orderBy('payment_id', 'DESC')
+                          ->get();
+        
+        return view('admin.financial.students_payment.receipt', compact(['select_student', 'select_payment', 'select_last_payment']));
     }
 }

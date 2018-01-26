@@ -3,17 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/F:/xampp/htdocs/UMS/app/Admission.php</file>
-            <file>file:/F:/xampp/htdocs/UMS/app/Http/Controllers/CandidateController.php</file>
+            <file>file:/F:/xampp/htdocs/UMS/app/Student.php</file>
             <file>file:/F:/xampp/htdocs/UMS/app/Http/Controllers/UserController.php</file>
-            <file>file:/F:/xampp/htdocs/UMS/app/Http/Controllers/StudentController.php</file>
+            <file>file:/F:/xampp/htdocs/UMS/resources/views/admin/financial/students_payment/receipt.blade.php</file>
+            <file>file:/F:/xampp/htdocs/UMS/resources/views/admin/financial/students_payment/add.blade.php</file>
+            <file>file:/F:/xampp/htdocs/UMS/resources/views/admin/financial/students_payment/all.blade.php</file>
             <file>file:/F:/xampp/htdocs/UMS/routes/breadcrumbs.php</file>
             <file>file:/F:/xampp/htdocs/UMS/resources/views/layouts/index.blade.php</file>
             <file>file:/F:/xampp/htdocs/UMS/routes/web.php</file>
-            <file>file:/F:/xampp/htdocs/UMS/app/Http/Controllers/AdmissionController.php</file>
-            <file>file:/F:/xampp/htdocs/UMS/resources/views/admin/financial/salary/teacher/receipt.blade.php</file>
-            <file>file:/F:/xampp/htdocs/UMS/resources/views/admin/admission/all.blade.php</file>
-            <file>file:/F:/xampp/htdocs/UMS/resources/views/admin/admission/view.blade.php</file>
+            <file>file:/F:/xampp/htdocs/UMS/app/Http/Controllers/PaymentController.php</file>
         </group>
     </open-files>
 </project-private>

@@ -10,7 +10,7 @@
         <div class="box-header">
           <h3 class="box-title">Add payment</h3>
         </div>
-        <form enctype="multipart/form-data" action="{{url('payment/insert')}}" method="post">
+        <form enctype="multipart/form-data" action="{{url('student-payment/insert')}}" method="post">
             {{csrf_field()}}
              <div class="box-body">
                  <div class="col-sm-6 col-sm-offset-3">

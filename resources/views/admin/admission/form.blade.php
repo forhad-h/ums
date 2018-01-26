@@ -123,7 +123,7 @@
                         @endif
                     </div>
                     <div class="form-group{{ $errors->has('caddress') ? ' has-error' : '' }}">
-                        <label for="caddress">Current address</label>
+                        <label for="caddress">Current address <span class="text-require">(require)</span></label>
                         <textarea class="form-control" id="caddress" name="caddress" rows="3" placeholder="Enter your current address">{{old('caddress')}}</textarea>
                         @if ($errors->has('caddress'))
                             <span class="help-block">
@@ -132,7 +132,7 @@
                         @endif
                     </div>
                     <div class="form-group{{ $errors->has('paddress') ? ' has-error' : '' }}">
-                        <label for="paddress">Permanent address</label>
+                        <label for="paddress">Permanent address <span class="text-require">(require)</span></label>
                         <textarea class="form-control" id="paddress" name="paddress" rows="3" placeholder="Enter your permanent address">{{old('paddress')}}</textarea>
                         @if ($errors->has('paddress'))
                             <span class="help-block">

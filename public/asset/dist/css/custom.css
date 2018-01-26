@@ -1,16 +1,19 @@
 #btn-add, #btn-add-role {
-	width: 250px;
-	color: #fff;
-	position: relative;
+    width: 150px;
+    color: #fff;
+    border-radius: 0 3px 3px 0;
+    position: relative;
 }
 #btn-add i.fa, #btn-add-role i.fa {
-	position: absolute;
-	right: 10px;
-	top: 6px;
-	font-size: 19px;
-	-webkit-transition: transform 0.5s ease;
-      -o-transition: transform 0.5s ease;
-        transition: transform 0.5s ease;
+    position: absolute;
+    right: 10px;
+    top: 6px;
+    font-size: 19px;
+    -webkit-transition: transform 0.5s ease;
+    -o-transition: transform 0.5s ease;
+    transition: transform 0.5s ease;
+    color: #00a65a;
+    color: #fff;
 }
 #btn-add-role {
 	width: 170px;
@@ -23,7 +26,36 @@ button.btn.btn-collapse {
 	font-size: 16px;
 }
 .add-pheading {
-	padding: 0 0 3px 0;
+	padding: 10px 0;
+}
+.box-header {
+	text-align: center;
+}
+.trash-header {
+	color:#666;
+}
+.trash-body > table {
+	margin-bottom: 50px!important;
+	background: #fdfdfd;
+	border-color: #999;
+}
+.trash-body > table.table>tbody>tr>td,
+.trash-body > table.table>tbody>tr>th,
+.trash-body > table.table>tfoot>tr>td,
+.trash-body > table.table>tfoot>tr>th,
+.trash-body > table.table>thead>tr>td,
+.trash-body > table.table>thead>tr>th {
+	padding: 4px;
+	border-color: #999;
+}
+.content-header h5 {
+	margin: 0;
+}
+.content-header h5 .breadcrumb {
+	margin-bottom: 0;
+}
+.panel-default>.panel-heading {
+	background: #fff;
 }
 .custom-padding {
 	padding-left: 30px;
@@ -103,7 +135,7 @@ button.btn.btn-collapse {
 	min-width: 85px;
 }
 .vpi {
-	left: 25%;
+	left: 11.5%;
 	position: absolute;
 	top: -69px;
 }
@@ -206,4 +238,27 @@ input[type="file"]#ppic {
 	font-size: 26px;
     color: #666;
 	text-align: center;
+}
+.success-alert-msg, .error-alert-msg {
+    position: absolute;
+    left: 45%;
+    top: 0px;
+    z-index: 999999;
+    font-size: 16px;
+    padding: 14px 15px;
+    box-shadow: 0px 10px 32px -10px #555;
+}
+.success-alert-msg {
+	background: #d2ffcc;
+}
+.error-alert-msg {
+	background:#ffcccc;
+}
+.content-header .breadcrumb {
+	text-align: right;
+}
+.breadcrumb i.fa {
+	color: #337ab7;
+}
+.content {
 }

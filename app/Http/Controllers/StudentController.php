@@ -97,4 +97,32 @@ class StudentController extends Controller
                    ->get();
         return view('admin.student.edit', compact(['select', 'select_subject']));
     }
+    
+    public function soft_delete($id) {
+        $soft_delete = Student::where('id', '=', $id)
+                        ->update([
+                            'status' => 0
+                        ]);
+        if($soft_delete) {
+            return redirect('students')->with('success-delete', 'successful');
+        }
+    }
+    
+    public function restore($id) {
+        $restore = Student::where('id', '=', $id)
+                    ->update([
+                        'status' => 1,
+                    ]);
+        if($restore) {
+            return redirect('all-trash')->with('success-restore', 'succesful');
+        }
+    }
+    
+    public function delete($id) {
+        $delete = Student::where('id', '=', $id)
+                  ->delete();
+        if($delete) {
+            return redirect('all-trash')->with('success-pdelete', 'succesful');
+        }
+    }
 }

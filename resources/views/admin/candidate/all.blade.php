@@ -2,7 +2,7 @@
 @section('all')
 <section class="content-header">
   <h5>
-      {{ Breadcrumbs::render('candidates') }}
+      {{ Breadcrumbs::render('allCandidates') }}
   </h5>
 </section>
 <section class="content">
@@ -12,7 +12,7 @@
     </div>
     <!-- /.box-header -->
     <div class="box-body">
-      <table id="allTeacher" class="table table-bordered table-striped">
+      <table data-table="true" class="table table-bordered table-striped">
         <thead>
         <tr>
           <th>Roll no.</th>

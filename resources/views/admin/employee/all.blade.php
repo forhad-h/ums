@@ -10,7 +10,17 @@
     <div class="panel panel-default">
         <div class="panel-heading text-center add-pheading" role="tab" id="heading">
           <h4 class="panel-title">
-              <a class="btn btn-success{{$errors->all() || session('success-add') ? '' : ' collapsed'}}" id="btn-add" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsesec" aria-expanded="{{$errors->all() || session('success-add') ? 'true' : 'false'}}" aria-controls="collapsesec">
+            @php
+               $errors1 = '';
+               if($errors->has('name') || 
+                  $errors->has('designation') || 
+                  $errors->has('email') || 
+                  $errors->has('gender') ||  
+                  $errors->has('nid') ||  
+                  $errors->has('ppic')) $errors1 = true;
+                else $errors1 = false;
+            @endphp
+              <a class="btn btn-success{{$errors1 || session('success-add') ? '' : ' collapsed'}}" id="btn-add" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsesec" aria-expanded="{{$errors->all() || session('success-add') ? 'true' : 'false'}}" aria-controls="collapsesec">
               Add employee 
               
               <span class="pull-right-container">
@@ -19,16 +29,6 @@
             </a>
           </h4>
         </div>
-@php
-   $errors1 = '';
-   if($errors->has('name') || 
-      $errors->has('designation') || 
-      $errors->has('email') || 
-      $errors->has('gender') ||  
-      $errors->has('nid') ||  
-      $errors->has('ppic')) $errors1 = true;
-    else $errors1 = false;
-@endphp
         <div id="collapsesec" class="panel-collapse collapse{{$errors1 || session('success-add') ? ' in' : ''}}" role="tabpanel" aria-labelledby="heading">
             <form enctype="multipart/form-data" action="{{url('employee/insert')}}" method="post">
                 {{csrf_field()}}
@@ -210,7 +210,7 @@
     </div>
     <!-- /.box-header -->
     <div class="box-body">
-      <table id="allEmployees" class="table table-bordered table-striped">
+      <table data-table="true" class="table table-bordered table-striped">
         <thead>
         <tr>
           <th>ID</th>
@@ -262,7 +262,7 @@
   </div>
   <!-- /.box -->
 </section>
-  <div class="modal fade{{$errors->all() ? ' in' : ''}}" id="add-to-user" style="{{$errors->all() ? 'display:block;' : 'display:none;'}}">
+  <div class="modal fade" id="add-to-user">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
@@ -324,7 +324,4 @@
           <!-- /.modal-dialog -->
         </div>
         <!-- /.modal -->
-        @if($errors->all())
-        <div class="modal-backdrop fade in"></div>
-        @endif
 @endsection

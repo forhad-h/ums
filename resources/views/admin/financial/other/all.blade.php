@@ -136,7 +136,7 @@
     </div>
     <!-- /.box-header -->
     <div class="box-body">
-      <table id="allTeacher" class="table table-bordered table-striped">
+      <table data-table="true" class="table table-bordered table-striped">
         <thead>
         <tr>
           <th>Type</th>

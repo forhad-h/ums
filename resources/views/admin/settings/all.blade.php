@@ -156,7 +156,7 @@
               </form>
             </div>
             <div class="col-sm-6">
-              <table class="table table-bordered table-striped">
+              <table data-table="true" class="table table-bordered table-striped">
                 <thead>
                 <tr>
                   <th>Subject code</th>
