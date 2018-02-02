@@ -19,6 +19,7 @@ class CreateTSalariesTable extends Migration
             $table->string('payment_method', 50);
             $table->integer('pamount_taka');
             $table->string('pamount_words', 120);
+            $table->string('payment_month', 80);
             $table->string('payment_date', 80);
             $table->tinyInteger('status')->default(1);
             $table->timestamps();

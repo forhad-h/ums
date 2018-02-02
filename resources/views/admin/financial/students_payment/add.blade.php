@@ -14,16 +14,26 @@
             {{csrf_field()}}
              <div class="box-body">
                  <div class="col-sm-6 col-sm-offset-3">
-                     <div class="form-group">
+                     <div class="row">
+                     <div class="col-sm-12">
+                     <div class="form-group col-sm-4">
                          <label>Student ID</label>
                          <input type="text" class="form-control" name="student_id" value="{{$select->id}}" readonly>
                      </div>
                      
-                     <div class="form-group">
+                     <div class="form-group col-sm-4">
                          <label>Student name</label>
                          <input type="text" class="form-control" value="{{$select->name}}" disabled="disabled">
                      </div>
-
+                     
+                     <div class="form-group col-sm-4">
+                         <label>Student semester</label>
+                         <input type="text" name="student_semester" class="form-control" value="{{$select->semester}}" readonly>
+                     </div>
+                    </div>
+                     </div>
+                     
+                     <div class="col-sm-12">
                      <div class="form-group{{ $errors->has('payment_type') ? ' has-error' : '' }}">
                         <label for="payment_type">Payment type <span class="text-require">(require)</span></label>
                         <select id="payment_type" name="payment_type" class="form-control select2" style="width: 100%;">
@@ -108,6 +118,7 @@
                             </span>
                         @endif
                          <!-- /.input group -->
+                     </div>
                      </div>
                  </div>
              </div>

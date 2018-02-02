@@ -166,9 +166,9 @@ Breadcrumbs::register('addTSalary', function($breadcrumbs, $tSalary) {
     $breadcrumbs->push('Pay', route('addTSalary', $tSalary->id));
 });
 
-Breadcrumbs::register('receiptTSalary', function($breadcrumbs, $tSalary) {
+Breadcrumbs::register('receiptTSalary', function($breadcrumbs, $user, $payment) {
     $breadcrumbs->parent('allTSalary');
-    $breadcrumbs->push('Receipt', route('receiptTSalary', $tSalary->id));
+    $breadcrumbs->push('Receipt', route('receiptTSalary', [$user->id, $payment->payment_id]));
 });
 
 //Employees salary

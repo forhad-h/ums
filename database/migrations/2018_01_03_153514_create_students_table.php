@@ -31,6 +31,7 @@ class CreateStudentsTable extends Migration
             $table->string('simage', 100)->nullable();
             $table->string('session_year', 20);
             $table->string('session_name', 20);
+            $table->string('semester', 10)->default('1st');
             $table->integer('subject');
             $table->string('adate', 50);
             $table->tinyInteger('status')->default(1);

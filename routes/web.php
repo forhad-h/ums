@@ -51,7 +51,7 @@ Route::get('/student-payment/receipt/{sid}/{pid}', 'PaymentController@receipt')-
 
 Route::get('/teachers-salary', 'SalaryController@teachers_index')->name('allTSalary');
 Route::get('/teacher-salary/add/{id}', 'SalaryController@ts_add')->name('addTSalary');
-Route::get('/teacher-salary/receipt/{id}', 'SalaryController@ts_receipt')->name('receiptTSalary');
+Route::get('/teacher-salary/receipt/{sid}/{pid}', 'SalaryController@ts_receipt')->name('receiptTSalary');
 
 Route::get('/employees-salary', 'SalaryController@employees_index')->name('allESalary');
 Route::get('/employee-salary/add/{id}', 'SalaryController@es_add')->name('addESalary');
@@ -72,6 +72,7 @@ Route::get('/teacher/restore/{id}', 'UserController@restore')->name('restoreTeac
 Route::post('/teacher/update-profile', 'UserController@update_profile')->name('updateProfile');
 
 Route::post('/student/update', 'StudentController@update')->name('updateStudent');
+Route::post('/student/change-semester', 'StudentController@change_semester')->name('changeSemester');
 Route::get('/student/soft-delete/{id}', 'StudentController@soft_delete')->name('softDeleteStudent');
 Route::get('/student/delete/{id}', 'StudentController@delete')->name('deleteStudent');
 Route::get('/student/restore/{id}', 'StudentController@restore')->name('restoreStudent');

@@ -33,7 +33,7 @@
           <td>{{$data->institute}}</td>
           <td>{{$data->result}}</td>
           @if($data->marks != '')
-              <td>{{$data->marks}}<a href="{{route('addMarks', ['id' => $data->id])}}" class="btn-inner" data-toggle="modal" data-target="#add-marks" onclick="setAction(this);" title="Edit marks"><i class="fa fa-refresh"></i></a></td>
+              <td>{{$data->marks}}<a href="#" data-link="{{route('addMarks', ['id' => $data->id])}}" class="btn-inner" data-toggle="modal" data-target="#add-marks" onclick="setAction(this);" title="Edit marks"><i class="fa fa-refresh"></i></a></td>
           @else
               <td><a href="#" data-link="{{route('addMarks', ['id' => $data->id])}}" class="btn-add" data-toggle="modal" data-target="#add-marks" onclick="setAction(this);" title="Add marks"><i class="fa fa-plus-circle"></i></a></td>
           @endif

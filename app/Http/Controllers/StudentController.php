@@ -98,6 +98,19 @@ class StudentController extends Controller
         return view('admin.student.edit', compact(['select', 'select_subject']));
     }
     
+    public function change_semester(Request $request) {
+        $validate = $request->validate([
+                       'semester' => 'required',
+                   ]);
+        $update = Student::where('id', '=', $request->id)
+                                ->update([
+                                    'semester' => $request->semester,
+                                ]);
+        if($update) {
+            return redirect('students');
+        }
+    }
+    
     public function soft_delete($id) {
         $soft_delete = Student::where('id', '=', $id)
                         ->update([

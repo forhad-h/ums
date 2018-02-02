@@ -13,6 +13,13 @@ $(document).ready(function(){
 	  format: 'dd MM yyyy'
 	})
 	
+	$('#payment_month').datepicker({
+	  autoclose: true,
+	  format: 'MM yyyy',
+	  startView: "months", 
+	  minViewMode: "months"
+	})
+	
 	$('#payment_date').datepicker({
 	  autoclose: true,
 	  format: 'dd MM yyyy'

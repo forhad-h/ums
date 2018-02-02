@@ -71,6 +71,23 @@
                         @endif
                      </div>
                      
+                     <div class="form-group{{ $errors->has('payment_month') ? ' has-error' : '' }}">
+                         <label for="payment_month">Payment month <span class="text-require">(require)</span></label>
+
+                         <div class="input-group date">
+                           <div class="input-group-addon">
+                             <i class="fa fa-calendar"></i>
+                           </div>
+                             <input type="text" class="form-control  pull-right" id="payment_month" name="payment_month" value="{{old('payment_month')}}" placeholder="January 2018">
+                        </div>
+                        @if ($errors->has('payment_month'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('payment_month') }}</strong>
+                            </span>
+                        @endif
+                         <!-- /.input group -->
+                     </div>
+                     
                      <div class="form-group{{ $errors->has('payment_date') ? ' has-error' : '' }}">
                          <label for="payment_date">Payment date <span class="text-require">(require)</span></label>
 

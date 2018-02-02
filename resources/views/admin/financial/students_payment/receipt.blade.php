@@ -49,8 +49,8 @@
                         <strong class="small-strong">Subject</strong>
                         <p><span class="text-muted">&colon;</span>{{$select_student->subjectM ? $select_student->subjectM->subject_name : ''}}</p><br>
 
-                        <strong class="small-strong">Session</strong>
-                        <p><span class="text-muted">&colon;</span>{{$select_student->session}}</p><br>
+                        <strong class="small-strong">Semester</strong>
+                        <p><span class="text-muted">&colon;</span>{{$select_student->semester}}</p><br>
                     </div>
                     </div>
                 </div>
@@ -72,7 +72,8 @@
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th>Payment date</th>
+                            <th>Date</th>
+                            <th>Semester</th>
                             <th>Amount</th>
                             <th>Manage</th>
                         </tr>
@@ -81,6 +82,7 @@
                         @foreach($select_payment as $data)
                         <tr>
                             <td>{{$data->payment_date}}</td>
+                            <td>{{$data->student_semester}}</td>
                             <td>{{$data->pamount_taka}}</td>
                             <td class="manage-btn">
                                 <a href="{{url('student-payment/receipt/'.$data->student_id.'/'.$data->payment_id)}}" class="btn btn-success" data-toggle="tooltip" title="View receipt"><i class="fa fa-eye fa-lg"></i></a>

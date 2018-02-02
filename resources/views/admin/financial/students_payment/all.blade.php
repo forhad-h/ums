@@ -18,6 +18,7 @@
           <th>ID</th>
           <th>Name</th>
           <th>Subject</th>
+          <th>Semester</th>
           <th>Session fee</th>
           <th>Due</th>
           <th>Paid</th>
@@ -39,6 +40,7 @@
           <td>{{$data->id}}</td>
           <td>{{$data->name}}</td>
           <td>{{$data->subject_name}}</td>
+          <td>{{$data->semester}}</td>
           <td>{{$data->course_fee}}</td>
           <td>{{$data->course_fee}}</td>
           <td>{{$data->course_fee}}</td>

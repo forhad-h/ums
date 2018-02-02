@@ -44,6 +44,7 @@ class PaymentController extends Controller
                 ]);
         $insert = Payment::insertGetId([
              'student_id' => $request->student_id,
+             'student_semester' => $request->student_semester,
              'payment_type' => $request->payment_type,
              'payment_method' => $request->payment_method,
              'pamount_taka' => $request->pamount_taka,

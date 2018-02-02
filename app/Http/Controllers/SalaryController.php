@@ -16,11 +16,15 @@ class SalaryController extends Controller
     }
     
     public function teachers_index() {
-        $select = DB::table('users')
+        $select_teachers = DB::table('users')
                 ->where('users.status', '=', 1)
                 ->get();
         
-        return view('admin.financial.salary.teacher.all', compact('select'));
+        $select_payments = DB::table('t_salaries')
+                           ->orderBy('payment_id', 'DESC')
+                           ->get();
+        
+    return view('admin.financial.salary.teacher.all', compact(['select_teachers', 'select_payments', 'select_last_payment']));
     }
     
     public function ts_add($id) {
@@ -33,6 +37,7 @@ class SalaryController extends Controller
                     'payment_method' => 'required',
                     'pamount_taka' => 'required',
                     'pamount_words' => 'required',
+                    'payment_month' => 'required',
                     'payment_date' => 'required',
                 ], [
                     'pamount_taka.reqiored' => 'Payment amount in taka is required.',
@@ -43,17 +48,27 @@ class SalaryController extends Controller
              'payment_method' => $request->payment_method,
              'pamount_taka' => $request->pamount_taka,
              'pamount_words' => $request->pamount_words,
+             'payment_month' => $request->payment_month,
              'payment_date' => $request->payment_date,
         ]);
         
         if($insert > 0) {
-            return redirect('teacher-salary/receipt/'.$request->user_id);
+            return redirect('teacher-salary/receipt/'.$request->user_id.'/'.$insert);
         }
     }
     
-    public function ts_receipt($id) {
-        $select = User::findOrFail($id);
-        return view('admin.financial.salary.teacher.receipt', compact('select'));
+    public function ts_receipt($sid, $pid) {
+        $select_teacher = User::findOrFail($sid);
+        
+        $select_last_payment = TSalary::where('user_id', '=', $sid)
+                               ->where('payment_id', '=', $pid)
+                               ->orderBy('payment_id', 'DESC')
+                               ->first();
+        
+        $select_payment = TSalary::where('user_id', '=', $sid)->orderBy('payment_id', 'DESC')
+                          ->get();
+        
+        return view('admin.financial.salary.teacher.receipt', compact(['select_teacher', 'select_payment', 'select_last_payment']));
     }
     
     
@@ -76,6 +91,7 @@ class SalaryController extends Controller
                     'payment_method' => 'required',
                     'pamount_taka' => 'required',
                     'pamount_words' => 'required',
+                    'payment_month' => 'required',
                     'payment_date' => 'required',
                 ], [
                     'pamount_taka.reqiored' => 'Payment amount in taka is required.',
@@ -86,6 +102,7 @@ class SalaryController extends Controller
              'payment_method' => $request->payment_method,
              'pamount_taka' => $request->pamount_taka,
              'pamount_words' => $request->pamount_words,
+             'payment_month' => $request->payment_month,
              'payment_date' => $request->payment_date,
         ]);
         
