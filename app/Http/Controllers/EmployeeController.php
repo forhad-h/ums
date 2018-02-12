@@ -236,4 +236,23 @@ class EmployeeController extends Controller
             return redirect('employees')->with('success-delete', 'successful');
         }
     }
+    
+    public function restore($id) {
+        $restore = Employee::where('id', '=', $id)
+                    ->update([
+                        'status' => 1,
+                    ]);
+        if($restore) {
+            return redirect('all-trash')->with('success-restore', 'succesful');
+        }
+    }
+    
+    public function delete($id) {
+        $delete = Employee::where('id', '=', $id)
+                  ->delete();
+        if($delete) {
+            return redirect('all-trash')->with('success-pdelete', 'succesful');
+        }
+    }
+    
 }

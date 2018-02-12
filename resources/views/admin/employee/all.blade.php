@@ -197,7 +197,7 @@
 
                 <div class="box-footer footer0">
                     <div class="form-group text-center">
-                        <button type="submit" class="btn btn-lg btn-info">SUBMIT</button>
+                        <button type="submit" class="btn btn-lg btn-info">ADD EMPLOYEE</button>
                     </div>
                 </div>
             </form>

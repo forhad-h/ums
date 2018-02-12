@@ -135,7 +135,7 @@
           <td class="manage-btn">
                   <a href="{{url('admission/view/'.$data->admission_id)}}" class="btn btn-success"><i class="fa fa-eye fa-lg" data-toggle="tooltip" title="View admission"></i></a>
 				  
-                  <a href="{{url('admission/edit/'.$data->admission_id)}}" class="btn btn-warning" data-toggle="tooltip" title="Edit teacher"><i class="fa fa-pencil fa-lg"></i></a>
+                  <a href="{{url('admission/edit/'.$data->admission_id)}}" class="btn btn-warning" data-toggle="tooltip" title="Edit admission"><i class="fa fa-pencil fa-lg"></i></a>
 				  
                   <a href="{{url('admission/soft-delete/'.$data->admission_id)}}" onclick="event.preventDefault();confirmBox(this, 'soft-delete');" class="btn btn-danger" data-toggle="tooltip" title="Delete admission"><i class="fa fa-trash fa-lg"></i></a>
           </td>

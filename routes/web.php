@@ -83,6 +83,8 @@ Route::post('/employee/update-to-user', 'EmployeeController@update_tu')->name('u
 Route::post('/employee/update', 'EmployeeController@update')->name('updateEmployee');
 Route::get('/employee/soft-delete/{id}', 'EmployeeController@soft_delete')->name('softDeleteEmployee');
 Route::get('/employee/eu-delete/{email}', 'EmployeeController@eu_delete')->name('EUDelete');
+Route::get('/employee/restore/{id}', 'EmployeeController@restore')->name('restoreEmployee');
+Route::get('/employee/delete/{id}', 'EmployeeController@delete')->name('deleteEmployee');
 
 Route::post('/admission/insert', 'AdmissionController@insert')->name('insertAdmission');
 Route::post('/admission/update', 'AdmissionController@update')->name('updateAdmission');

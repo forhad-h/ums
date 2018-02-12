@@ -43,8 +43,9 @@ class AdmissionController extends Controller
                   ]);
         if($update) {
             return redirect('admission/edit/'.$id)->with('success-update', 'successful');
+        }else {
+             return redirect('admission/edit/'.$id)->with('nu-error', 'nothing to update');
         }
-        
     }
     
     public function soft_delete($id) {

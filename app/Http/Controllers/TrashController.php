@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Student;
+use App\Employee;
 class TrashController extends Controller
 {
     public function __construct() {
@@ -16,7 +17,8 @@ class TrashController extends Controller
                         ->get();
         $select_students =  Student::where('status', '=', 0)
                              ->get();
-        
-        return view('admin.trash.all', compact(['select_users', 'select_students']));
+        $select_employee = Employee::where('status', '=', 0)
+                             ->get();
+        return view('admin.trash.all', compact(['select_users', 'select_students', 'select_employee']));
     }
 }

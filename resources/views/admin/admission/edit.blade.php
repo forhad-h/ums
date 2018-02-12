@@ -97,7 +97,7 @@
 			</div>
 		   <div class="panel-footer footer0">
 			<div class="form-group text-center">
-				<button type="submit" class="btn btn-lg btn-info">Start</button>
+				<button type="submit" class="btn btn-lg btn-info">Update</button>
 			</div>
 		   </div>
 		</form> 
