@@ -15,10 +15,10 @@ class CreateSubjectsTable extends Migration
     {
         Schema::create('subjects', function (Blueprint $table) {
             $table->increments('subject_id');
-            $table->integer('subject_code');
+            $table->integer('subject_code')->unsigned();
             $table->string('subject_name', 40);
-            $table->integer('course_fee');
-            $table->tinyInteger('status')->default(1);
+            $table->integer('course_fee')->unsigned();
+            $table->tinyInteger('status')->unsigned()->default(1);
             $table->timestamps();
         });
     }

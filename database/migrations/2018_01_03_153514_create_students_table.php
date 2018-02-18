@@ -32,9 +32,9 @@ class CreateStudentsTable extends Migration
             $table->string('session_year', 20);
             $table->string('session_name', 20);
             $table->string('semester', 10)->default('1st');
-            $table->integer('subject');
+            $table->integer('subject')->unsigned();
             $table->string('adate', 50);
-            $table->tinyInteger('status')->default(1);
+            $table->tinyInteger('status')->unsigned()->default(1);
             $table->timestamps();
         });
     }

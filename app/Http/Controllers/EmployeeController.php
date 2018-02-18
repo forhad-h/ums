@@ -228,6 +228,7 @@ class EmployeeController extends Controller
         }
     }
     
+
     public function eu_delete($email) {
         $delete = User::where('email', '=', $email)
                         ->delete();

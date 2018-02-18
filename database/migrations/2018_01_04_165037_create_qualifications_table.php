@@ -15,11 +15,11 @@ class CreateQualificationsTable extends Migration
     {
         Schema::create('qualifications', function (Blueprint $table) {
             $table->increments('qua_id');
-            $table->integer('candidate_id');
+            $table->integer('candidate_id')->unsigned();
             $table->string('course_type', 80);
             $table->string('institute', 150);
             $table->string('result', 20);
-            $table->tinyInteger('marks')->nullable();
+            $table->tinyInteger('marks')->unsigned()->nullable();
             $table->string('passing_year', 10);
             $table->timestamps();
         });

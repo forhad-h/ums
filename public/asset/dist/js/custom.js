@@ -79,6 +79,15 @@ $(document).ready(function(){
 	$('.breadcrumb-item:first-child').before('<i class="fa fa-home icon-breadcrumbs"></i>');
 	
 	$("[role='alert']").delay(2000).fadeOut(500);
+	
+	//appear question option
+	$('#question_type').on('change', function() {
+		if($(this).val() == 1) {
+			$('#option_field').slideDown(500);
+		}else {
+			$('#option_field').slideUp(500);
+		}
+	})
 });
 
 function confirmBox(thisElm, dType) {
@@ -112,7 +121,25 @@ function softDelete(e, thisElm) {
 		}
 	});
 }
-
 function setAction(thisElm) {
 	$('#modal-form').attr('action', $(thisElm).attr('data-link'));
+}
+
+function appearModal(thisElm, e, id, modalType) {
+	e.preventDefault();
+	$('#modal-form').attr('action', $(thisElm).attr('data-link'));
+	
+	if(modalType == 'marks') {
+		$.get('./get-marks/'+ id, function(response) {
+			$('#marks').val(response);
+			$('#bs-modal').modal('show');
+	    });
+	}else if(modalType == 'utUser') {
+		$.get('./get-user/'+ id, function(response) {
+			$("option[value="+response+"]").attr('selected', 'selected');
+			$('#bs-modal').modal('show');
+	    });
+	}else if(modalType == 'atUser') {
+		$('#bs-modal').modal('show');
+	}
 }

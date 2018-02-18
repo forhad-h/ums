@@ -15,14 +15,14 @@ class CreatePaymentsTable extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->increments('payment_id');
-            $table->integer('student_id');
+            $table->integer('student_id')->unsigned();
             $table->string('student_semester', 10);
             $table->string('payment_type', 80);
             $table->string('payment_method', 50);
-            $table->integer('pamount_taka');
+            $table->integer('pamount_taka')->unsigned();
             $table->string('pamount_words', 120);
             $table->string('payment_date', 80);
-            $table->tinyInteger('status')->default(1);
+            $table->tinyInteger('status')->unsigned()->default(1);
             $table->timestamps();
         });
     }

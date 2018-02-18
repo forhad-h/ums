@@ -55,37 +55,64 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-6 text-center">
+        <div class="col-sm-4 text-center">
 
               @php
-                  $start_date = App\Admission::orderBy('admission_id', 'DESC')->first()->start_date;
-                  $end_date = App\Admission::orderBy('admission_id', 'DESC')->first()->end_date;
+                  $select_adm = App\Admission::orderBy('admission_id', 'DESC')->first();
+                  $start_date = $select_adm->start_date;
+                  $end_date = $select_adm->end_date;
+                  $end_date_obj = \Carbon\Carbon::parse($end_date);
                   $current_date = \Carbon\Carbon::now();
-                  $total_days = \Carbon\Carbon::parse($start_date)->diffInDays(\Carbon\Carbon::parse($end_date));
-                  $passed_days = \Carbon\Carbon::now()->diffInDays(\Carbon\Carbon::parse($end_date));
-                  $candidates = App\Candidate::where('status', '=', 1)->count();
+                  $total_days = \Carbon\Carbon::parse($start_date)->diffInDays($end_date_obj);
+                  $remaining_days = \Carbon\Carbon::now()->diffInDays($end_date_obj) + 1;
+                  
+                  $total_candidates = App\Candidate::where([
+                                                   ['status', '=', 2],
+                                                   ['session_year', '=', $select_adm->session_year],
+                                                   ['session_name', '=', $select_adm->session_name],
+                                                ])->count();
+                                                
+                 $total_take_exam = App\Candidate::where([
+                                                   ['take_exam', '=', 1],
+                                                   ['session_year', '=', $select_adm->session_year],
+                                                   ['session_name', '=', $select_adm->session_name],
+                                                ])->count();
               @endphp
-            
+            @if($end_date_obj->addDays(1) > $current_date) 
             <div class="info-box text-left">
                 <span class="info-box-icon bg-aqua"><i class="fa fa-id-card-o"></i></span>
-
                 <div class="info-box-content">
-                  <span class="info-box-text">Admission</span>
-                  <span class="info-box-number">Start date - {{$start_date}}</span>
-                  <span class="info-box-number">End date - {{$end_date}}</span>
+                  <span class="info-box-text">Admission going on</span>
+                  <span class="text-info">Start date - {{$start_date}}</span><br>
+                  <span class="text-info">End date - {{$end_date}}</span><br>
+                  <span class="text-info">Remaining - <span class="text-maroon">{{$remaining_days}} days</span></span>
                 </div>
                 <!-- /.info-box-content -->
             </div>
-          <!-- /.info-box -->
+            <!-- /.info-box -->
+            @else
+            <div class="info-box text-left">
+                <span class="info-box-icon bg-gray"><i class="fa fa-id-card-o"></i></span>
+                <div class="info-box-content">
+                  <span class="info-box-text">Admission end</span>
+                  <span class="text-muted">Start date - {{$start_date}}</span><br>
+                  <span class="text-muted">End date - {{$end_date}}</span><br>
+                  <span class="text-muted">Remaining - 0 days</span>
+                </div>
+                <!-- /.info-box-content -->
+            </div>
+             <!-- /.info-box -->
+            @endif
         </div>
             
-        <div class="col-sm-6">
+        <div class="col-sm-4">
             <div class="info-box">
-                <span class="info-box-icon bg-aqua"><i class="fa fa-address-book-o"></i></span>
+                <span class="info-box-icon bg-green"><i class="fa fa-address-book-o"></i></span>
 
                 <div class="info-box-content">
                   <span class="info-box-text">Candidates</span>
-                  <span class="info-box-number">Total - {{$candidates}}</span>
+                  <span class="text-info">Total - {{$total_candidates}}</span><br>
+                  <span class="text-info">Take exam - {{$total_take_exam}}</span>
                 </div>
                 <!-- /.info-box-content -->
             </div>

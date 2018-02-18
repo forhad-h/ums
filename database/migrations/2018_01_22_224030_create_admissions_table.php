@@ -19,7 +19,7 @@ class CreateAdmissionsTable extends Migration
             $table->string('session_name', 20);
             $table->string('start_date', 50);
             $table->string('end_date', 50);
-            $table->tinyInteger('status')->default(1);
+            $table->tinyInteger('status')->unsigned()->default(1);
         });
     }
 

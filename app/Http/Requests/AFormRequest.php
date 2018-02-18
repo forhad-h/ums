@@ -43,8 +43,8 @@ class AFormRequest extends FormRequest
             'subject_third' => 'required',
             'religion' => 'nullable|string|min:3|max:30',
             'nationality' => 'nullable|string|min:3|max:30',
-            'image' => 'required|max:100',
-            'signature' => 'required|max:100',
+            'image' => 'required',
+            'signature' => 'required',
         ];
     }
     

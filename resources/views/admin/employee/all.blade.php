@@ -182,12 +182,12 @@
                                 <input type="file" name="ppic" id="file-1" class="inputfile inputfile-1" data-multiple-caption="{count} files selected" multiple />
                                 <label for="file-1"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17"><path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"/></svg> <span>Upload &hellip;</span></label>
                                 <div class="form-group{{ $errors->has('ppic') ? ' has-error' : '' }}">
-									@if ($errors->has('ppic'))
-										<span class="help-block">
-											<strong>{{ $errors->first('ppic') }}</strong>
-										</span>
-									@endif
-								</div>
+                                        @if ($errors->has('ppic'))
+                                                <span class="help-block">
+                                                        <strong>{{ $errors->first('ppic') }}</strong>
+                                                </span>
+                                        @endif
+                                </div>
                             </div>
                             
                         </div>
@@ -231,9 +231,14 @@
           <td>{{$data->email}}</td>
           <td>{{$data->phone}}</td>
           @php
-              $is_user = '';
+              $is_user = $role_name = '';
               foreach($all_users as $udata) {
                   if($udata->email == $data->email) {
+                      $get_user = App\User::where('email', '=', $data->email)->first();
+                      $role_id = $get_user->role_id;
+                      $get_role = App\Role::where('id', '=', $role_id)->first();
+                      $role_name = $get_role->role_name;
+                      
                       $is_user = true;
                       break;
                   }
@@ -241,13 +246,13 @@
               }
           @endphp
           @if($is_user)
-              <td><span class="text-muted">User</span>
-                  <a href="#" data-link="{{route('updatetU', ['id' => $data->id])}}" class="btn-inner" data-toggle="modal" data-target="#add-to-user" onclick="setAction(this);" title="Edit info"><i class="fa fa-refresh"></i></a>
+              <td><span class="text-muted">{{$role_name}}</span>
+                  <a href="#" data-link="{{route('updatetU', ['id' => $data->id])}}" class="btn-inner" data-toggle="modal" data-target="#bs-modal" onclick="setAction(this);" title="Edit info"><i class="fa fa-refresh"></i></a>
 				  
                   <a href="{{route('EUDelete', ['email' => $data->email])}}" class="btn-inner" data-toggle="tooltip" title="Repeal from user"><i class="fa fa-trash text-danger"></i></a></td>
           @else
               <td><span class="text-muted">None</span> 
-		          <a href="#" data-link="{{route('addtU', ['id' => $data->id])}}" class="btn-add btn-inner" data-toggle="modal" data-target="#add-to-user" onclick="setAction(this);"  title="Add to user"><i class="fa fa-plus-circle"></i></a></td>
+		          <a href="#" data-link="{{route('addtU', ['id' => $data->id])}}" class="btn-add btn-inner" data-toggle="modal" data-target="#bs-modal" onclick="setAction(this);"  title="Add to user"><i class="fa fa-plus-circle"></i></a></td>
           @endif
           <td class="manage-btn">
                   <a href="{{url('employee/view/'.$data->id)}}" class="btn btn-success" data-toggle="tooltip" title="View Employee"><i class="fa fa-eye fa-lg"></i></a>
@@ -262,15 +267,15 @@
   </div>
   <!-- /.box -->
 </section>
-  <div class="modal fade" id="add-to-user">
+  <div class="modal fade" id="bs-modal">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Add user</h4>
+                <h4 class="modal-title">Add to user</h4>
               </div>
-                <form method="post" action="{{session('dummy') ? 'go' : '#'}}" id="modal-form">
+                <form method="post" action="#" id="modal-form">
                     {{csrf_field()}}
                     <div class="modal-body">
                         <div class="form-group{{ $errors->has('role') ? ' has-error' : '' }}">

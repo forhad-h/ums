@@ -33,9 +33,9 @@
           <td>{{$data->institute}}</td>
           <td>{{$data->result}}</td>
           @if($data->marks != '')
-              <td>{{$data->marks}}<a href="#" data-link="{{route('addMarks', ['id' => $data->id])}}" class="btn-inner" data-toggle="modal" data-target="#add-marks" onclick="setAction(this);" title="Edit marks"><i class="fa fa-refresh"></i></a></td>
+              <td>{{$data->marks}}<a href="#" data-link="{{route('addMarks', ['id' => $data->id])}}" class="btn-inner" data-target="#add-marks" onclick="appearModal(this, event, {{$data->id}}, 'marks');" title="Edit marks"><i class="fa fa-refresh"></i></a></td>
           @else
-              <td><a href="#" data-link="{{route('addMarks', ['id' => $data->id])}}" class="btn-add" data-toggle="modal" data-target="#add-marks" onclick="setAction(this);" title="Add marks"><i class="fa fa-plus-circle"></i></a></td>
+              <td><a href="#" data-link="{{route('addMarks', ['id' => $data->id])}}" class="btn-add" data-toggle="modal" onclick="appearModal(this, event, {{$data->id}}, 'marks');" title="Add marks"><i class="fa fa-plus-circle"></i></a></td>
           @endif
           <td class="manage-btn">
               @if($data->marks >= 40)
@@ -48,7 +48,7 @@
       </table>
     </div>
     <!-- /.box-body -->
-        <div class="modal fade{{$errors->all() ? ' in' : ''}}"  id="add-marks" style="{{$errors->all() ? 'display:block;' : 'display:none;'}}">
+        <div class="modal fade{{$errors->all() ? ' in' : ''}}"  id="bs-modal">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">

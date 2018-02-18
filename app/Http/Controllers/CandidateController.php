@@ -35,6 +35,11 @@ class CandidateController extends Controller
         $select = $this->select_candidate(0);
         return view('admin.candidate.rejected', compact('select'));
     }
+    public function get_marks($id) {
+       $select = Qualification::where('qua_id', '=', $id)->first();
+        
+       return $select->marks;
+    }
     
     public function add_marks(Request $request) {
         $validate = $request->validate([
@@ -48,6 +53,7 @@ class CandidateController extends Controller
             return redirect('candidates');
         }
     }
+    
     
     public function select($id) {
         $select = Candidate::findOrFail($id);
@@ -70,6 +76,7 @@ class CandidateController extends Controller
     }
     
     private function add_field($request, $select) {
+        
         return  [
                     'name' => $select->name,
                     'phone' => $select->phone,

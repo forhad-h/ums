@@ -1,11 +1,14 @@
-@extends('layouts.index')
+@extends('layouts.public')
 @section('admission-form')
 <section class="content-header">
+  @auth
   <h5>
       {{ Breadcrumbs::render('admissionForm') }}
   </h5>
+  @endauth
 </section>
-<section class="content">
+<section class="content clearfix">
+    <div class="col-md-8 col-md-offset-2">
     <div class="box box-warning">
         <div class="box-header with-border">
             <div class="col-md-12 box-title">
@@ -17,6 +20,7 @@
 
         <form enctype="multipart/form-data" action="{{url('candidate/insert')}}" method="post">
             {{csrf_field()}}
+    
         <div class="box-body body0">
             <div class="row">
                 <div class="col-sm-6 custom-padding">
@@ -328,6 +332,7 @@
             </div>
         </div>
     </form>
+</div>
 </div>
 </section>
 @endsection

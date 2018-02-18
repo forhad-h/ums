@@ -3,14 +3,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/F:/xampp/htdocs/UMS/app/Http/Controllers/PublicController.php</file>
             <file>file:/F:/xampp/htdocs/UMS/app/Http/Controllers/UserController.php</file>
-            <file>file:/F:/xampp/htdocs/UMS/app/Http/Controllers/TrashController.php</file>
             <file>file:/F:/xampp/htdocs/UMS/resources/views/home.blade.php</file>
             <file>file:/F:/xampp/htdocs/UMS/resources/views/layouts/index.blade.php</file>
             <file>file:/F:/xampp/htdocs/UMS/routes/web.php</file>
-            <file>file:/F:/xampp/htdocs/UMS/app/Http/Controllers/EmployeeController.php</file>
-            <file>file:/F:/xampp/htdocs/UMS/resources/views/admin/trash/all.blade.php</file>
-            <file>file:/F:/xampp/htdocs/UMS/resources/views/admin/employee/all.blade.php</file>
+            <file>file:/F:/xampp/htdocs/UMS/app/Http/Controllers/AdmissionController.php</file>
+            <file>file:/F:/xampp/htdocs/UMS/resources/views/welcome.blade.php</file>
+            <file>file:/F:/xampp/htdocs/UMS/app/Http/Controllers/ExamController.php</file>
+            <file>file:/F:/xampp/htdocs/UMS/resources/views/admin/admission/QuestionPaper.blade.php</file>
+            <file>file:/F:/xampp/htdocs/UMS/resources/views/admin/admission/form.blade.php</file>
+            <file>file:/F:/xampp/htdocs/UMS/routes/breadcrumbs.php</file>
+            <file>file:/F:/xampp/htdocs/UMS/resources/views/admin/admission/exam/QuestionPaper.blade.php</file>
+            <file>file:/F:/xampp/htdocs/UMS/database/migrations/2018_01_04_183333_create_candidates_table.php</file>
         </group>
     </open-files>
 </project-private>

@@ -203,3 +203,30 @@ Breadcrumbs::register('allTrash', function($breadcrumbs) {
     $breadcrumbs->parent('home');
     $breadcrumbs->push('All trash', route('allTrash'));
 });
+
+//Exams
+Breadcrumbs::register('allExam', function($breadcrumbs) {
+    $breadcrumbs->parent('admission');
+    $breadcrumbs->push('All exam', route('admissionExam'));
+});
+
+Breadcrumbs::register('editExam', function ($breadcrumbs, $exam) {
+    $breadcrumbs->parent('allExam');
+    $breadcrumbs->push('Edit exam', route('editExam', $exam->eid));
+});
+
+Breadcrumbs::register('examQuestPaper', function ($breadcrumbs, $id) {
+    $breadcrumbs->parent('allExam');
+    $breadcrumbs->push($id);
+    $breadcrumbs->push('Question paper', route('QuestionPaper', $id));
+});
+
+Breadcrumbs::register('editQuestion', function ($breadcrumbs, $question) {
+    $breadcrumbs->parent('examQuestPaper', $question->exam_id);
+    $breadcrumbs->push('Edit question', route('editExam', $question->quest_id));
+});
+
+Breadcrumbs::register('questionPaper', function ($breadcrumbs, $id) {
+    $breadcrumbs->parent('admission');
+    $breadcrumbs->push('Question paper', route('QuestionPaper', $id));
+});

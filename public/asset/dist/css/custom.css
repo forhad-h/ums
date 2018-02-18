@@ -1,3 +1,4 @@
+
 #btn-add, #btn-add-role {
     width: 150px;
     color: #fff;
@@ -239,7 +240,9 @@ input[type="file"]#ppic {
     color: #666;
 	text-align: center;
 }
-.success-alert-msg, .error-alert-msg {
+.success-alert-msg,
+.error-alert-msg,
+.warning-alert-msg {
     position: absolute;
     left: 45%;
     top: 0px;
@@ -254,6 +257,9 @@ input[type="file"]#ppic {
 .error-alert-msg {
 	background:#ffcccc;
 }
+.warning-alert-msg {
+	background: #fff5cc;
+}
 .content-header .breadcrumb {
 	text-align: right;
 }
@@ -264,4 +270,21 @@ input[type="file"]#ppic {
 }
 .ui-datepicker-calendar {
     display: none;
+}
+.custom-btn:hover {
+	color: #fff;
+}
+.QuestionPaper {
+	width: 380px;
+}
+.QuestionPaper h4 {
+	
+}
+.single_question {
+	margin-bottom:30px;
+}
+.btn-back {
+	position: absolute;
+    left: 40px;
+    top: 10px;
 }

@@ -1,7 +1,11 @@
-
-* modal disapear
 * Hide/show role button
 * order by do not work with data-table
 * make data-date for date picker
 * admission form appear with sidebar menu
 * alert shows after <-back
+* add sound effect with alert
+* reduce complexity about 'nothing to update'
+   if timestamp true and created at and updated at field exist,
+   always 'successful update' appear even no data has been updated.
+* Same email could be used teachers, employees, student
+* attractive design

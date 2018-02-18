@@ -22,12 +22,12 @@ class CreateEmployeesTable extends Migration
             $table->text('caddress')->nullable();
             $table->text('paddress')->nullable();
             $table->string('image', 100)->nullable();
-            $table->integer('salary_scale')->nullable();
+            $table->integer('salary_scale')->unsigned()->nullable();
             $table->text('experience')->nullable();
             $table->string('gender', 20);
             $table->string('nationality', 30)->nullable();
             $table->string('religion', 30)->nullable();
-            $table->tinyInteger('status')->default(1);
+            $table->tinyInteger('status')->unsigned()->default(1);
             $table->string('nid', 50);
             $table->rememberToken();
             $table->string('joining_date', 50)->nullable();
